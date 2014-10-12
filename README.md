@@ -1,4 +1,3 @@
-tp2_algo_I
+TP2 - Algoritmos y Estructura de Datos I
 ==========
-
-segundo trabajo práctico para algoritmos y estructura de datos I
+Entrega: 31/10/2014

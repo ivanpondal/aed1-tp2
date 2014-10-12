@@ -1,0 +1,95 @@
+% Clase y configuracion de tipo de documento
+\documentclass[10pt,a4paper,spanish]{article}
+% Inclusion de paquetes
+\usepackage{a4wide}
+\usepackage{amsmath, amscd, amssymb, amsthm, latexsym}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[width=15.5cm, left=3cm, top=2.5cm, height= 24.5cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{xspace}
+\usepackage{longtable}
+\usepackage{caratula}
+% incluye macros espec materia
+\include{algo1-cmds}
+
+% Encabezado
+\lhead{Algoritmos y Estructuras de Datos I}
+\rhead{Grupo XX}
+% Pie de pagina
+\renewcommand{\footrulewidth}{0.4pt}
+\lfoot{Facultad de Ciencias Exactas y Naturales}
+\rfoot{Universidad de Buenos Aires}
+
+\begin{document}
+
+% Datos de caratula
+\materia{Algoritmos y Estructuras de Datos I}
+\titulo{Trabajo Pr\'actico N\'umero 1}
+%\subtitulo{}
+\grupo{Grupo: XX}
+
+\integrante{Turing, Alan}{0/07}{aturing@ejemplo.com}
+\integrante{Djikstra, Edsger W.}{11/49}{edjikstra@ejemplo.com}
+
+\maketitle
+
+\newpage
+
+% Para crear un indice
+%\tableofcontents
+
+% Forzar salto de pagina
+\clearpage
+
+% Pueden modularizar el documento incluyendo otros .tex
+% \include{observaciones}
+
+\section{Observaciones}
+
+	\begin{enumerate}
+		\item un item
+		\item otro item
+	\end{enumerate}
+
+% Otro salto de pagina
+% \newpage
+
+\section{Resolución}
+
+\begin{ejercicio}
+	% EJEMPLO
+	Especificación ejemplo:
+
+	\begin{problema}{cociente}{a,b:\ent}{res:\ent}
+		\requiere{b \neq 0}
+		\asegura{res == a$ $div$ $b}
+	\end{problema}
+
+\end{ejercicio}
+
+\begin{ejercicio}
+	% EJEMPLO
+	Otro ejemplo sin resultado:
+	
+	\begin{problema*}{cociente}{a,b:\ent}
+		\requiere{b \neq 0}
+		\modifica{a,b}
+		\asegura{a == pre(a)$ $div$ $pre(b)}
+		\asegura{b == pre(a)$ $mod$ $pre(b)}
+	\end{problema*}
+
+\end{ejercicio}
+
+% \subsection{Ejercicio X}
+
+\subsection{Auxiliares}
+
+\begin{itemize}
+	\item \auxil{inversa(a:\TLista{T}) : \TLista{T}}{[a_{|a|-i-1}\ |\ i \selec [0 \twodots \longitud{a})]}
+\end{itemize}
+        
+\end{document}

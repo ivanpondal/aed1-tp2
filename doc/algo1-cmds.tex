@@ -1,0 +1,187 @@
+%practicas
+\newcommand{\practica}[2]{%
+    \title{Pr\'actica #1 \\ #2}
+    \author{Algoritmos y Estructuras de Datos I}
+    \date{Segundo Cuatrimestre 2014}
+
+    \maketitle
+}
+
+%ejercicios
+\newtheorem{exercise}{Ejercicio}
+\newenvironment{ejercicio}{\begin{exercise}\rm}{\end{exercise} \vspace{0.2cm}}
+\newenvironment{items}{\begin{enumerate}[i)]}{\end{enumerate}}
+\newenvironment{subitems}{\begin{enumerate}[a)]}{\end{enumerate}}
+\newcommand{\sugerencia}[1]{\noindent \textbf{Sugerencia:} #1}
+
+%tipos basicos
+\newcommand{\float}{\mathsf{Float}}
+\newcommand{\rea}{\mathbb{R}}
+\newcommand{\ent}{\mathbb{Z}}
+\newcommand{\cha}{\mathsf{Char}}
+\newcommand{\bool}{\mathsf{Bool}}
+\newcommand{\Then}{\rightarrow}
+\newcommand{\Iff}{\leftrightarrow}
+
+\newcommand{\mcd}{\mathrm{mcd}}
+\newcommand{\prm}[1]{\ensuremath{\mathsf{prm}(#1)}}
+\newcommand{\sgd}[1]{\ensuremath{\mathsf{sgd}(#1)}}
+
+%listas
+\newcommand{\TLista}[1]{[#1]}
+\newcommand{\lvacia}{\ensuremath{[\ ]}}
+\newcommand{\longitud}[1]{\left| #1 \right|}
+\newcommand{\cons}[1]{\mathsf{cons}(#1)}
+%\newcommand{\cons}[1]{\mathrm{cons}(#1)}
+\newcommand{\indice}[1]{\mathsf{indice}(#1)}
+%\newcommand{\indice}[1]{\mathrm{indice}(#1)}
+\newcommand{\conc}[1]{\mathsf{conc}(#1)}
+%\newcommand{\conc}[1]{\mathrm{conc}(#1)}
+\newcommand{\cab}[1]{\mathsf{cab}(#1)}
+%\newcommand{\cab}[1]{\mathrm{cab}(#1)}
+\newcommand{\cola}[1]{\mathsf{cola}(#1)}
+%\newcommand{\cola}[1]{\mathrm{cola}(#1)}
+\newcommand{\sub}[1]{\mathsf{sub}(#1)}
+%\newcommand{\sub}[1]{\mathrm{sub}(#1)}
+\newcommand{\en}[1]{\mathsf{en}(#1)}
+%\newcommand{\en}[1]{\mathrm{en}(#1)}
+\newcommand{\cuenta}[2]{\mathsf{cuenta}\ensuremath{(#1, #2)}}
+%\newcommand{\cuenta}[2]{\ensuremath{\mathrm{cuenta}(#1, #2)}}
+\newcommand{\suma}[1]{\mathsf{suma}(#1)}
+%\newcommand{\suma}[1]{\mathrm{suma}(#1)}
+\newcommand{\twodots}{\mathrm{..}}
+
+% Acumulador
+\newcommand{\acum}[1]{\mathsf{acum}(#1)}
+
+% \selector{variable}{dominio}
+\newcommand{\selector}[2]{#1~\ensuremath{\leftarrow}~#2}
+\newcommand{\selec}{\ensuremath{\leftarrow}}
+
+% -----------------
+% Especificacion
+% -----------------
+
+% Para problemas con resultado:
+% \begin{problema}{nombre}{argumentos}{resultado}
+%       \modifica{variables}
+%       \requiere[nombre]{condicion}
+%       \requiere[nombre]{condicion}
+%       ...
+%       \asegura[nombre]{condicion}
+%       \asegura[nombre]{condicion}
+%       ...
+% \end{problema}
+
+% Para problemas sin resultado:
+% \begin{problema*}{nombre}{argumentos}
+%       \modifica{variables}
+%       \requiere[nombre]{condicion}
+%       \requiere[nombre]{condicion}
+%       ...
+%       \asegura[nombre]{condicion}
+%       \asegura[nombre]{condicion}
+%       ...
+% \end{problema*}
+
+\newenvironment{problema}[3]{
+    \vspace{0.2cm}
+    \noindent \textsf{problema #1}\ensuremath{(#2) = #3\{}\\
+    \begin{tabular}{p{0.02\textwidth} p{0.85 \textwidth}}
+}{
+    \end{tabular}
+
+    \noindent \ensuremath{\}}
+    \vspace{0.15cm}
+}
+
+\newenvironment{problema*}[2]{
+    \vspace{0.2cm}
+    \noindent \textsf{problema #1}\ensuremath{(#2)\{}\\
+    \begin{tabular}{p{0.02\textwidth} p{0.85 \textwidth}}
+}{
+    \end{tabular}
+
+    \noindent \ensuremath{\}}
+    \vspace{0.15cm}
+}
+
+\newcommand{\requiere}[2][]{& \textsf{requiere #1: }\ensuremath{#2};\\}
+\newcommand{\asegura}[2][]{& \textsf{asegura #1: }\ensuremath{#2};\\}
+\newcommand{\modifica}[1]{& \textsf{modifica }\ensuremath{#1};\\}
+\newcommand{\pre}[1]{\textsf{pre}\ensuremath{(#1)}}
+\newcommand{\aux}[2]{& \textsf{aux }\ensuremath{#1 = #2};\\}
+\newcommand{\problemanom}[1]{\textsf{#1}}
+\newcommand{\problemail}[3]{\textsf{problema #1}\ensuremath{(#2) = #3}}
+\newcommand{\problemailsinres}[2]{\textsf{problema #1}\ensuremath{(#2)}}
+\newcommand{\requiereil}[2][]{\textsf{requiere #1: }\ensuremath{#2}}
+\newcommand{\asegurail}[2][]{\textsf{asegura #1: }\ensuremath{#2}}
+\newcommand{\modificail}[1]{\textsf{modifica }\ensuremath{#1}}
+\newcommand{\auxil}[2]{\textsf{aux }\ensuremath{#1 = #2};}
+\newcommand{\auxnom}[1]{\textsf{aux }\ensuremath{#1}}
+
+% -----------------
+% Tipos compuestos
+% -----------------
+
+\newcommand{\Pred}[1]{\mathit{#1}}
+\newcommand{\TSet}[1]{\textsf{Conjunto}\ensuremath{\langle #1 \rangle}}
+\newcommand{\TSetFinito}[1]{\textsf{Conjunto}\ensuremath{\langle #1 \rangle}}
+\newcommand{\TRac}{\tiponom{Racional}}
+\newcommand{\TVec}{\tiponom{Vector}}
+\newcommand{\True}{\mathrm{True}}
+\newcommand{\False}{\mathrm{False}}
+\newcommand{\Func}[1]{\mathrm{#1}}
+\newcommand{\cardinal}[1]{\left| #1 \right|}
+\newcommand{\enum}[2]{\ensuremath{\mathsf{#1} = \langle \mathsf{#2} \rangle}}
+
+\newenvironment{tipo}[1]{%
+    \vspace{0.2cm}
+    \textsf{tipo #1}\ensuremath{\{}\\
+    \begin{tabular}[l]{p{0.02\textwidth} p{0.02\textwidth} p{0.82 \textwidth}}
+}{%
+    \end{tabular}
+
+    \ensuremath{\}}
+    \vspace{0.15cm}
+}
+
+\newcommand{\observador}[3]{%
+    & \multicolumn{2}{p{0.85\textwidth}}{\textsf{observador #1}\ensuremath{(#2):#3}}\\%
+}
+\newcommand{\observadorconreq}[3]{
+    & \multicolumn{2}{p{0.85\textwidth}}{\textsf{observador #1}\ensuremath{(#2):#3 \{}}\\
+}
+\newcommand{\observadorconreqfin}{
+    & \multicolumn{2}{p{0.85\textwidth}}{\ensuremath{\}}}\\
+}
+\newcommand{\obsrequiere}[2][]{& & \textsf{requiere #1: }\ensuremath{#2};\\}
+
+\newcommand{\explicacion}[1]{&& #1 \\}
+\newcommand{\invariante}[1]{%
+    & \multicolumn{2}{p{0.85\textwidth}}{\textsf{invariante }\ensuremath{#1}}\\%
+}
+\newcommand{\auxinvariante}[2]{
+    & \multicolumn{2}{p{0.85\textwidth}}{\textsf{aux }\ensuremath{#1 = #2}};\\
+}
+
+\newcommand{\tiponom}[1]{\ensuremath{\mathsf{#1}}\xspace}
+\newcommand{\obsnom}[1]{\ensuremath{\mathsf{#1}}}
+
+% -----------------
+% Ecuaciones de terminacion en funcional
+% -----------------
+
+\newenvironment{ecuaciones}{%
+    $$
+    \begin{array}{l @{\ /\ (} l @{,\ } l @{)\ =\ } l}
+}{%
+    \end{array}
+    $$
+}
+
+\newcommand{\ecuacion}[4]{#1 & #2 & #3 & #4\\}
+
+% Listas por comprension. El primer parametro es la expresion y el
+% segundo tiene los selectores y las condiciones.
+\newcommand{\comp}[2]{[\,#1\,|\,#2\,]}
