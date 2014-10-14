@@ -8,6 +8,7 @@ import cv2
 """ 
 Just need to install:
 
+	sudo apt-get install python-numpy
 	sudo apt-get install python-opencv
 
 """
@@ -18,8 +19,8 @@ def usage():
 	print "		python algo1converter.py   in_file   out_file   method"
 	print 
 	print "	where method: "
-	print " 		0:	Image     -> [ [ Pixel ] ] "
-	print " 		1:  [ [ Pixel ] ] ->     Image     "
+	print " 		0:  	Image -> Spec 	"
+	print " 		1: 	Spec  -> Image  "
 	print
 
 def showImg(imgname):
@@ -29,9 +30,6 @@ def showImg(imgname):
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 
-def pixel2str(img,i,j):
-	return '('+str(img[i][j][0])+';'+str(img[i][j][1])+';'+str(img[i][j][2])+')'
-
 def pic2spec():
 	picname= str(sys.argv[1])
 	outfile= str(sys.argv[2])
@@ -39,20 +37,37 @@ def pic2spec():
 	img = cv2.imread(picname,cv2.IMREAD_COLOR)
 
 	h,w= len(img),len(img[0])
+	ps= []
 	with open(outfile,'w') as f:
-#		f.write('[')
 		for i in xrange(h):
-			f.write('[')
 			for j in xrange(w):
-				f.write(pixel2str(img,i,j))
-				if j < len(img[0])-1: f.write(',')
-			f.write(']')
-			f.write('\n')
+				ps.append(pixel2str(img,i,j))
+		ss= str(h)+' '+str(w)+' ['+','.join(ps)+']\n'
+		f.write(ss)
+	# showImg(picname)
 
-#			if i < len(img)-1: f.write(',')
-#		f.write(']')
+def spec2pic():
+	picname= str(sys.argv[1])
+	outfile= str(sys.argv[2])
 
-	showImg(picname)
+	with open(picname,'r') as f:		
+		data= f.readline().strip()
+		h,w = map(int,data[0:data.find('[')].split())
+		raw_img= data[data.find('[')+2:-2].split('),(')				
+		img= blackBox(h,w)
+		for i in xrange(h):
+			for j in xrange(w):
+				img[i][j]= map(int,raw_img[(i*w)+j].split(';'))
+
+		# img= imgFilter(img,3)
+
+		img= np.array(img)
+		cv2.imwrite(outfile,img)
+
+	# showImg(outfile)
+
+def pixel2str(img,i,j):
+	return '('+str(img[i][j][0])+';'+str(img[i][j][1])+';'+str(img[i][j][2])+')'
 
 def kNeigh(img,k,x,y):
 	pxs= []
@@ -69,6 +84,9 @@ def applyFilter(pxs,fx):
 
 def pxBlack():
 	return (0,0,0)
+
+def blackBox(h,w):
+	return [ [pxBlack()]*w for k in xrange(h) ]
 
 def imgFilter(img,k):
 	res= list(img)
@@ -87,27 +105,6 @@ def imgFilter(img,k):
 				res[y][x]= pxBlack()
 
 	return res
-
-def spec2pic():
-	picname= str(sys.argv[1])
-	outfile= str(sys.argv[2])
-
-	with open(picname,'r') as f:
-		img= []
-		for line in f:
-			row= []
-			row_pxs= line[2:-3].split('),(')
-			for raw_px in row_pxs:
-				px= map(int,raw_px.split(';'))
-				row.append(px)
-			img.append(row)
-
-		# img= imgFilter(img,5)
-
-		img= np.array(img)
-		cv2.imwrite(outfile,img)
-
-	showImg(outfile)
 
 if __name__ == '__main__':
 	if len(sys.argv) != 4:
