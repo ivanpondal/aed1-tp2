@@ -28,12 +28,14 @@
 
 % Datos de caratula
 \materia{Algoritmos y Estructuras de Datos I}
-\titulo{Trabajo Pr\'actico N\'umero 1}
+\titulo{Trabajo Pr\'actico N\'umero 2}
 %\subtitulo{}
-\grupo{Grupo: XX}
+\grupo{Grupo: 07}
 
-\integrante{Turing, Alan}{0/07}{aturing@ejemplo.com}
-\integrante{Djikstra, Edsger W.}{11/49}{edjikstra@ejemplo.com}
+\integrante{Demartino, Francisco}{348/14}{demartino.francisco@gmail.com}
+\integrante{Frachtenberg Goldsmit, Kevin}{247/14}{kevinfra94@gmail.com}
+\integrante{Gomez, Horacio}{756/13}{horaciogomez.1993@gmail.com}
+\integrante{Pondal, Iván}{78/14}{ivan.pondal@gmail.com}
 
 \maketitle
 
@@ -58,15 +60,13 @@
 % Otro salto de pagina
 % \newpage
 
-\section{Resolución}
+\section{Especificación}
 
 \begin{ejercicio}
-	% EJEMPLO
-	Especificación ejemplo:
+	Especificación Posiciones Más Oscuras:
 
-	\begin{problema}{cociente}{a,b:\ent}{res:\ent}
-		\requiere{b \neq 0}
-		\asegura{res == a$ $div$ $b}
+	\begin{problema}{posicionesMasOscuras}{i:Imagen}{res:[(\ent, \ent)]}
+		\asegura{res == [(x,y)|$ $(x \leftarrow [0..ancho(i)),y \leftarrow [0..alto(i)), a \leftarrow [0..ancho(i)),$ $b \leftarrow [0..alto(i)) ),$ $cantColorPxl(color(i, x, y)) \leq cantColorPxl(color(i, a, b))] }
 	\end{problema}
 
 \end{ejercicio}
@@ -89,7 +89,9 @@
 \subsection{Auxiliares}
 
 \begin{itemize}
-	\item \auxil{inversa(a:\TLista{T}) : \TLista{T}}{[a_{|a|-i-1}\ |\ i \selec [0 \twodots \longitud{a})]}
+	\item \auxil{cantColorPxl(p : Pixel) : \ent}{
+	   red(p) + green(p) + blue(p)
+	}
 \end{itemize}
         
 \end{document}
