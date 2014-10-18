@@ -72,15 +72,25 @@
 \end{ejercicio}
 
 \begin{ejercicio}
-	% EJEMPLO
-	Otro ejemplo sin resultado:
-	
-	\begin{problema*}{cociente}{a,b:\ent}
-		\requiere{b \neq 0}
-		\modifica{a,b}
-		\asegura{a == pre(a)$ $div$ $pre(b)}
-		\asegura{b == pre(a)$ $mod$ $pre(b)}
+\end{ejercicio}
+
+\begin{ejercicio}
+\end{ejercicio}
+
+\begin{ejercicio}
+\end{ejercicio}
+
+\begin{ejercicio}
+\end{ejercicio}
+
+\begin{ejercicio}
+
+	\begin{problema*}{eliminarMasVotada}{g: Galeria}
+		\requiere{|imagenes(g)| > 0}
+		\modifica{g}
+		\asegura{ mismos(imagenes(pre(g)), imagenes(g) ++\  imagenMasVotada(g))}
 	\end{problema*}
+	
 
 \end{ejercicio}
 
@@ -92,6 +102,15 @@
 	\item \auxil{cantColorPxl(p : Pixel) : \ent}{
 	   red(p) + green(p) + blue(p)
 	}
+	
+	\item \auxil{imagenMasVotada(g: Galeria) : Imagen} { \newline
+	  [i | i \leftarrow imagenes(g), votos(i) == max(todosLosVotos(g)) ] _0
+	}
+	
+	\item \auxil{todosLosVotos(g: Galeria) : Imagen}{
+	  [votos(i) | i \leftarrow imagenes(g)]
+	}
+	
 \end{itemize}
         
 \end{document}
