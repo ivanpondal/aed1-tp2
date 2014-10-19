@@ -9,11 +9,12 @@
 using namespace std;
 
 void testPixel();
+void testImagen();
 
 int main()
 {
     testPixel();
-
+    testImagen();
     cout << "Tests OK" << endl;
 }
 
@@ -87,4 +88,23 @@ void testPixel() {
   assert (c2.red()    == 0);
   assert (c2.green()  == 0);
   assert (c2.blue()   == 0);
+}
+
+void testImagen() {
+  // constructor, alto, ancho, todanegra
+  Pixel negro;
+  Pixel rojo(255, 0, 0);
+  Pixel p;
+  Imagen i1 (20, 30);
+  assert(i1.alto() == 20);
+  assert(i1.ancho() == 30);
+  for (int y=0; y < i1.alto(); y++) {
+    for (int x=0; x < i1.ancho(); x++) {
+        assert(i1.obtenerPixel(y, x) == negro);
+    }
+  }
+  assert(i1.obtenerPixel(2,3) == negro);
+  i1.modificarPixel(2,3, rojo);
+  assert(i1.obtenerPixel(2,3) == rojo);
+
 }
