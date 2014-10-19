@@ -15,6 +15,7 @@ class Pixel {
   int green() const;
   int blue() const;
   bool operator==(const Pixel &otro) const;
+  bool operator!=(const Pixel &otro) const;
 
   void guardar(std::ostream& os) const;
   void cargar (std::istream& is);

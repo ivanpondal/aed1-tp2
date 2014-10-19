@@ -1,6 +1,6 @@
-#include "../include/pixel.h"
-#include "../include/imagen.h"
-#include "../include/galeria_imagenes.h"
+#include "pixel.h"
+#include "imagen.h"
+#include "galeria_imagenes.h"
 
 #include <iostream>
 
@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
 	int selected_action =- 1;
-	
+
 	while(selected_action != 0){
 		cout << "ingrese el número de la acción que desea realizar:" << endl;
 		cout << "0. exit" << endl;
@@ -24,9 +24,9 @@ int main()
 		cout << "9. votar" << endl;
 		cout << "10. eliminarMásVotada" << endl;
 		cout << "11. guardar galería" << endl;
-		
+
 		cin >> selected_action;
-		
+
 		switch (selected_action){
 			case 1:
 				// TODO blur
@@ -63,5 +63,5 @@ int main()
 				break;
 		}
 	}
-	
+
 }
