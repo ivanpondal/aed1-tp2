@@ -63,7 +63,7 @@
 \section{Especificación}
 
 \begin{ejercicio}
-	
+
 	\begin{problema}{posicionesMasOscuras}{i:Imagen}{res:[(\ent, \ent)]}
 		\asegura{res == [(x,y)|$ $(x \leftarrow [0..ancho(i)),y \leftarrow [0..alto(i)), a \leftarrow [0..ancho(i)),$ $b \leftarrow [0..alto(i)) ),$ $cantColorPxl(color(i, x, y)) \leq cantColorPxl(color(i, a, b))] }
 	\end{problema}
@@ -77,7 +77,7 @@
 		\modifica{g}
 		\asegura{ mismos(imagenes(g), i:imagenes(pre(g))}
 	\end{problema*}
-	
+
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -96,7 +96,7 @@
 		\modifica{g}
 		\asegura{ mismos(imagenes(pre(g)), imagenes(g) ++\  imagenMasVotada(pre(g)))}
 	\end{problema*}
-	
+
 
 \end{ejercicio}
 
@@ -108,15 +108,15 @@
 	\item \auxil{cantColorPxl(p : Pixel) : \ent}{
 	   red(p) + green(p) + blue(p)
 	}
-	
+
 	\item \auxil{imagenMasVotada(g: Galeria) : Imagen} { \newline
-	  [i | i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ] 
+	  [i | i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ] _0
 	}
-	
+
 	\item \auxil{todosLosVotos(g: Galeria) : [\ent]}{
 	  [votos(i) | i \leftarrow imagenes(g)]
 	}
-	
+
 \end{itemize}
-        
+
 \end{document}
