@@ -83,8 +83,10 @@
 
 	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
     \modifica{g}
-    \asegura { i \in imagenes(g)    \rightarrow mismos(imagenes(g), imagenes(pre(g)))}
-		\asegura { i \notin imagenes(g) \rightarrow mismos(imagenes(g), imagenes(pre(g)) ++\ i )}
+    \asegura { i \in imagenes(pre(g))    \rightarrow mismos(imagenes(g), imagenes(pre(g)))}
+		\asegura { i \notin imagenes(pre(g)) \rightarrow mismos(imagenes(g), imagenes(pre(g)) ++\ i )}
+		\asegura { (\forall j \in imagenes(pre(g)))\ votos(g, j) == votos(pre(g), j) }
+		\asegura { i \notin imagenes(pre(g)) \rightarrow votos(g, i) == 0 }
 	\end{problema*}
 
 \end{ejercicio}
@@ -104,6 +106,7 @@
 		\requiere{|imagenes(g)| > 0}
 		\modifica{g}
 		\asegura{ mismos(imagenes(pre(g)), imagenes(g) ++\  imagenMasVotada(pre(g)))}
+		\asegura{ (\forall i \in imagenes(g))\ votos(g, i) == votos(pre(g), i) }
 	\end{problema*}
 
 
@@ -123,8 +126,9 @@
 	}
 
 	\item \auxil{todosLosVotos(g: Galeria) : [\ent]}{
-	  [votos(i) | i \leftarrow imagenes(g)]
+	  [votos(g, i) | i \leftarrow imagenes(g)]
 	}
+
 
 \end{itemize}
 
