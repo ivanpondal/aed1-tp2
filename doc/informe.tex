@@ -73,7 +73,7 @@
 \begin{ejercicio}
 
 	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
-		\requiere{i \notin g}
+		\requiere{i \notin imagenes(g)}
 		\modifica{g}
 		\asegura{ mismos(imagenes(g), i:imagenes(pre(g))}
 \end{problema*}
