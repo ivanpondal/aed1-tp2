@@ -76,6 +76,15 @@
 		\requiere{i \notin g}
 		\modifica{g}
 		\asegura{ mismos(imagenes(g), i:imagenes(pre(g))}
+\end{problema*}
+    \\
+		así como está, TENES QUE REVISAR QUE NO ESTÉ DESDE AFUERA (por el requiere) \\
+     versión sin requiere:
+
+	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
+    \modifica{g}
+    \asegura { i \in imagenes(g)    \rightarrow mismos(imagenes(g), imagenes(pre(g)))}
+		\asegura { i \notin imagenes(g) \rightarrow mismos(imagenes(g), imagenes(pre(g)) ++\ i )}
 	\end{problema*}
 
 \end{ejercicio}
