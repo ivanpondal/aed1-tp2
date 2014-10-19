@@ -1,21 +1,24 @@
 #include "pixel.h"
 
+bool enRango(int min, int max, int v) {
+  return (min <= v) && (v <= max);
+}
+
 Pixel::Pixel(int red, int green, int blue) {
+  this->cambiarPixel(0, 0, 0);
   this->cambiarPixel(red, green, blue);
 }
 
 Pixel::Pixel () {
-  this->cambiarPixel(0,0,0);
+  this->cambiarPixel(0, 0, 0);
 }
 
 void Pixel::cambiarPixel(int red, int green, int blue) {
-  red   = max(0, min(red, 255));
-  green = max(0, min(green, 255));
-  blue  = max(0, min(blue, 255));
-
-  intensidades[0] = red;
-  intensidades[1] = green;
-  intensidades[2] = blue;
+  if (enRango(0, 255, red) && enRango(0, 255, green) && enRango(0, 255, blue)) {
+    intensidades[0] = red;
+    intensidades[1] = green;
+    intensidades[2] = blue;
+  }
 }
 
 int Pixel::red() const {
