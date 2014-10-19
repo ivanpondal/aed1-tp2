@@ -78,14 +78,18 @@
 		\asegura{ mismos(imagenes(g), i:imagenes(pre(g))}
 \end{problema*}
     \\
-		así como está, TENES QUE REVISAR QUE NO ESTÉ DESDE AFUERA (por el requiere) \\
+		así como está, HAY QUE REVISAR QUE NO ESTÉ DESDE AFUERA (por el requiere) \\
      versión sin requiere:
 
 	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
     \modifica{g}
-    \asegura { i \in imagenes(pre(g))    \rightarrow mismos(imagenes(g), imagenes(pre(g)))}
-		\asegura { i \notin imagenes(pre(g)) \rightarrow mismos(imagenes(g), imagenes(pre(g)) ++\ i )}
-		\asegura { (\forall j \in imagenes(pre(g)))\ votos(g, j) == votos(pre(g), j) }
+		\asegura {
+			(\forall j \in imagenes(pre(g)))\
+			j \in imagenes(g) \land votos(g, j) == votos(pre(g), j) }
+		\asegura {
+			(\forall j \in imagenes(g), j \neq i)\
+			j \in imagenes(pre(g))
+		}
 		\asegura { i \notin imagenes(pre(g)) \rightarrow votos(g, i) == 0 }
 	\end{problema*}
 
