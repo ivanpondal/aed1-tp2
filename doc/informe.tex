@@ -65,7 +65,8 @@
 \begin{ejercicio}
 
 	\begin{problema}{posicionesMasOscuras}{i:Imagen}{res:[(\ent, \ent)]}
-		\asegura{res == [(x,y)|$ $(x \leftarrow [0..ancho(i)),y \leftarrow [0..alto(i)), a \leftarrow [0..ancho(i)),$ $b \leftarrow [0..alto(i)) ),$ $cantColorPxl(color(i, x, y)) \leq cantColorPxl(color(i, a, b))] }
+		\asegura{res == [(x,y)|$ $(x \leftarrow [0..ancho(i)),y \leftarrow [0..alto(i))),
+		\newline cantColorPxl(color(i, x, y)) == cantColorPixelMasOscuro(i)] }
 	\end{problema}
 
 \end{ejercicio}
@@ -124,7 +125,15 @@
 	\item \auxil{cantColorPxl(p : Pixel) : \ent}{
 	   red(p) + green(p) + blue(p)
 	}
-
+	
+	\item \auxil{cantColorPixelMasOscuro(i: Imagen) : \ent}{
+	  min[z | z \leftarrow listaCantColores(i)]
+	}
+	  
+	\item \auxil{listaCantColores(i: Imagen) : \TLista{\ent}}{
+	  [r$ $|$ $(x \leftarrow ancho(i), y \leftarrow alto(i)), r==cantColorPxl(color(i, x, y))]
+	}
+	
 	\item \auxil{imagenMasVotada(g: Galeria) : Imagen} { \newline
 	  [i | i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ] _0
 	}
