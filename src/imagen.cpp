@@ -52,6 +52,47 @@ int Imagen::ancho() const {
 // void Imagen::acuarela(int k);
 //
 // bool Imagen::operator==(const Imagen &otra) const;
-//
-// void Imagen::guardar(std::ostream& os) const;
-// void Imagen::cargar (std::istream& is);
+
+void Imagen::guardar(std::ostream& os) const {
+
+  os << this->alto() << ' ' << this->ancho() << ' ';
+
+  os << '[';
+
+  for (int y=0; y<this->alto(); y++) {
+      for (int x=0; x<this->ancho(); x++) {
+
+          if ( !(y == 0 && x == 0) )  {
+              os << ',';
+          }
+
+          pixels[y][x].guardar(os);
+
+      }
+  }
+
+  os << ']';
+}
+
+void Imagen::cargar (std::istream& is) {
+    int alto, ancho;
+    char c;
+
+    pixels.empty();
+
+    is >> alto >> ancho;
+
+    is >> c; // [
+
+    for (int y=0; y<alto; y++) {
+      Pixel1DContainer fila;
+      for (int x=0; x<ancho; x++) {
+        Pixel p;
+        p.cargar(is);
+        fila.push_back(p);
+        is >> c; // ] o ,
+      }
+      pixels.push_back(fila);
+    }
+
+}

@@ -95,16 +95,31 @@ void testImagen() {
   Pixel negro;
   Pixel rojo(255, 0, 0);
   Pixel p;
-  Imagen i1 (20, 30);
-  assert(i1.alto() == 20);
-  assert(i1.ancho() == 30);
+  Imagen i1 (2, 3);
+  assert(i1.alto() == 2);
+  assert(i1.ancho() == 3);
+
   for (int y=0; y < i1.alto(); y++) {
     for (int x=0; x < i1.ancho(); x++) {
         assert(i1.obtenerPixel(y, x) == negro);
     }
   }
-  assert(i1.obtenerPixel(2,3) == negro);
-  i1.modificarPixel(2,3, rojo);
-  assert(i1.obtenerPixel(2,3) == rojo);
 
+  assert(i1.obtenerPixel(1,1) == negro);
+  i1.modificarPixel(1,1, rojo);
+  assert(i1.obtenerPixel(1,1) == rojo);
+
+  //guardar
+  ostringstream oss;
+  i1.guardar(oss);
+  assert (oss.str() == "2 3 [(0;0;0),(0;0;0),(0;0;0),(0;0;0),(255;0;0),(0;0;0)]");
+
+  //cargar
+  istringstream iss("2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)]");
+  Imagen ic(0,0);
+  ic.cargar(iss);
+  assert (ic.obtenerPixel(0,0) == Pixel(1,    2,  3));
+  assert (ic.obtenerPixel(0,1) == Pixel(123,121, 31));
+  assert (ic.obtenerPixel(1,0) == Pixel(2,    1,231));
+  assert (ic.obtenerPixel(1,1) == Pixel(167,161,173));
 }
