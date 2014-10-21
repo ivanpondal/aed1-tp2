@@ -6,7 +6,6 @@ bool enRango(int min, int max, int v);
 #include <vector>
 
 Imagen::Imagen(int alto_param, int ancho_param) {
-  if (alto_param > 0 && ancho_param > 0) {
 
     for (int y=0; y<alto_param; y++) {
       Pixel1DContainer fila;
@@ -17,26 +16,16 @@ Imagen::Imagen(int alto_param, int ancho_param) {
       pixels.push_back(fila);
     }
 
-  }
 }
 
 Pixel Imagen::obtenerPixel(int fila, int columna) const {
-  if (enRango(0, this->alto()  - 1, fila) &&
-      enRango(0, this->ancho() - 1, columna)) {
-
-        Pixel p = pixels.at(fila).at(columna);
-        return p;
-
-  }
+    return pixels.at(fila).at(columna);
 }
-void Imagen::modificarPixel(int fila, int columna, const Pixel &pixel) {
-  if (enRango(0, this->alto()  - 1, fila) &&
-      enRango(0, this->ancho() - 1, columna)) {
 
-        pixels.at(fila).at(columna).cambiarPixel(
-          pixel.red(), pixel.green(), pixel.blue()
-        );
-  }
+void Imagen::modificarPixel(int fila, int columna, const Pixel &pixel) {
+    pixels.at(fila).at(columna).cambiarPixel(
+      pixel.red(), pixel.green(), pixel.blue()
+    );
 }
 
 int Imagen::alto() const {

@@ -5,7 +5,6 @@ bool enRango(int min, int max, int v) {
 }
 
 Pixel::Pixel(int red, int green, int blue) {
-  this->cambiarPixel(0, 0, 0);
   this->cambiarPixel(red, green, blue);
 }
 
@@ -14,11 +13,9 @@ Pixel::Pixel () {
 }
 
 void Pixel::cambiarPixel(int red, int green, int blue) {
-  if (enRango(0, 255, red) && enRango(0, 255, green) && enRango(0, 255, blue)) {
     intensidades[0] = red;
     intensidades[1] = green;
     intensidades[2] = blue;
-  }
 }
 
 int Pixel::red() const {
