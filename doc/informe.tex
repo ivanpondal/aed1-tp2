@@ -35,7 +35,7 @@
 \integrante{Demartino, Francisco}{348/14}{demartino.francisco@gmail.com}
 \integrante{Frachtenberg Goldsmit, Kevin}{247/14}{kevinfra94@gmail.com}
 \integrante{Gomez, Horacio}{756/13}{horaciogomez.1993@gmail.com}
-\integrante{Pondal, Iván}{78/14}{ivan.pondal@gmail.com}
+\integrante{Pondal, Iván}{078/14}{ivan.pondal@gmail.com}
 
 \maketitle
 
@@ -65,8 +65,8 @@
 \begin{ejercicio}
 
 	\begin{problema}{posicionesMasOscuras}{i:Imagen}{res:[(\ent, \ent)]}
-		\asegura{res == [(x,y)|$ $(x \leftarrow [0..ancho(i)),y \leftarrow [0..alto(i))),
-		\newline cantColorPxl(color(i, x, y)) == cantColorPixelMasOscuro(i)] }
+		\asegura{res == [(x,y) \ | \ y \leftarrow [0..alto(i)),x \leftarrow [0..ancho(i)),
+		\newline sumaCanalesPixel(color(i, x, y)) == menorSumaCanales(i)] }
 	\end{problema}
 
 \end{ejercicio}
@@ -97,6 +97,10 @@
 \end{ejercicio}
 
 \begin{ejercicio}
+	\begin{problema}{laMasChiquitaConPuntoBlanco}{g:Galeria}{result:Imagen}
+		\requiere { |listaImagenesConPixelBlanco(imagenes(g))|>0 }
+		\asegura {result == listaImagenesOrdenadasTama\tilde{n}o(listaImagenesConPixelBlanco(imagenes(g)))[0] }
+	\end{problema}
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -122,26 +126,53 @@
 \subsection{Auxiliares}
 
 \begin{itemize}
-	\item \auxil{cantColorPxl(p : Pixel) : \ent}{
+	\item \auxil{minimo(l : [\ent]) : \ent}{
+	   [x \ | \ x \leftarrow l ,(\forall y \leftarrow l) x \leq y)][0]
+	}
+
+	\item \auxil{sumaCanalesPixel(p : Pixel) : \ent}{
 	   red(p) + green(p) + blue(p)
 	}
-	
-	\item \auxil{cantColorPixelMasOscuro(i: Imagen) : \ent}{
-	  min[z | z \leftarrow listaCantColores(i)]
-	}
 	  
-	\item \auxil{listaCantColores(i: Imagen) : \TLista{\ent}}{
-	  [r$ $|$ $(x \leftarrow ancho(i), y \leftarrow alto(i)), r==cantColorPxl(color(i, x, y))]
+	\item \auxil{listaSumaCanalesPixeles(i: Imagen) : \TLista{\ent}}{ \newline
+	  [sumaCanales \ | \ y \leftarrow alto(i), x \leftarrow ancho(i), sumaCanales==sumaCanalesPixel(color(i, x, y))]
+	}
+	
+	\item \auxil{menorSumaCanales(i: Imagen) : \ent}{
+	  minimo(listaSumaCanalesPixeles(i))
 	}
 	
 	\item \auxil{imagenMasVotada(g: Galeria) : Imagen} { \newline
-	  [i | i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ] _0
+	  [i \ | \ i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ]
 	}
 
 	\item \auxil{todosLosVotos(g: Galeria) : [\ent]}{
 	  [votos(g, i) | i \leftarrow imagenes(g)]
 	}
 
+	\item \auxil{cantPixeles(i: Imagen) : \ent}{
+	  ancho(i)*alto(i)
+	}
+	
+	\item \auxil{esPixelBlanco(px: Pixel) : Bool}{
+	  red(px) == green(px) == blue(px) == 255
+	}
+	
+	\item \auxil{tienePixelBlanco(i: Imagen) : Bool}{ \newline
+	  alguno([esPixelBlanco(color(i,x,y)) | y \leftarrow [0..alto(i)),x \leftarrow [0..ancho(i))])
+	}
+	
+	\item \auxil{listaImagenesConPixelBlanco(imgs: [Imagen]) : [Imagen]}{
+	  [im \ | \ im \leftarrow imgs, tienePixelBlanco(im)]
+	}
+
+	\item \auxil{cuentaMenosPixeles(imgs: [Imagen], img: Imagen) : \ent}{ \newline
+	  |[1 \ | \ im \leftarrow imgs, cantPixeles(im)<cantPixeles(img)]|
+	}
+
+	\item \auxil{listaImagenesOrdenadasTama\tilde{n}o(imgs: [Imagen]) : [Imagen]}{ \newline
+	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMenosPixeles(imgs,im)==i]
+	}
 
 \end{itemize}
 
