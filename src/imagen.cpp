@@ -66,7 +66,7 @@ void Imagen::cargar (std::istream& is) {
     int alto, ancho;
     char c;
 
-    pixels.empty();
+    pixels.clear();
 
     is >> alto >> ancho;
 
