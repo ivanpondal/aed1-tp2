@@ -63,21 +63,20 @@ void Pixel::guardar(std::ostream& os) const {
 void Pixel::cargar(std::istream& is) {
   char c;
   int r, g, b;
-  bool valido;
 
-  valido = true;
+  is >> c; // (
 
-  is >> c;
-  if (c != '(') valido = false;
   is >> r;
-  is >> c;
-  if (c != ';') valido = false;
-  is >> g;
-  is >> c;
-  if (c != ';') valido = false;
-  is >> b;
-  is >> c;
-  if (c != ')') valido = false;
 
-  if (valido) this->cambiarPixel(r,g,b);
+  is >> c; // ;
+
+  is >> g;
+
+  is >> c; // ;
+
+  is >> b;
+
+  is >> c; // )
+
+  this->cambiarPixel(r,g,b);
 }
