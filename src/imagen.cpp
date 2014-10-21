@@ -1,7 +1,6 @@
 
 #include "imagen.h"
 #include "pixel.h"
-bool enRango(int min, int max, int v);
 
 #include <vector>
 

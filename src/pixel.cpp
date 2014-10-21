@@ -1,9 +1,5 @@
 #include "pixel.h"
 
-bool enRango(int min, int max, int v) {
-  return (min <= v) && (v <= max);
-}
-
 Pixel::Pixel(int red, int green, int blue) {
   this->cambiarPixel(red, green, blue);
 }
