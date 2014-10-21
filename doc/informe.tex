@@ -72,28 +72,14 @@
 \end{ejercicio}
 
 \begin{ejercicio}
-
-	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
-		\requiere{i \notin imagenes(g)}
-		\modifica{g}
-		\asegura{ mismos(imagenes(g), i:imagenes(pre(g))}
-\end{problema*}
-    \\
-		así como está, HAY QUE REVISAR QUE NO ESTÉ DESDE AFUERA (por el requiere) \\
-     versión sin requiere:
-
-	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
-    \modifica{g}
-		\asegura {
-			(\forall j \in imagenes(pre(g)))\
-			j \in imagenes(g) \land votos(g, j) == votos(pre(g), j) }
-		\asegura {
-			(\forall j \in imagenes(g), j \neq i)\
-			j \in imagenes(pre(g))
+	\begin{problema}{top10}{g: Galeria}{result : [Imagen]}
+		\asegura{
+			(|imagenes(g)|<10) \rightarrow listaImagenesOrdenadasVotos(g, imagenes(g))
 		}
-		\asegura { i \notin imagenes(pre(g)) \rightarrow votos(g, i) == 0 }
-	\end{problema*}
-
+		\asegura{
+			(|imagenes(g)| \geq 10) \rightarrow listaImagenesOrdenadasVotos(g, imagenes(g))[0$..$10)
+		}
+	\end{problema}
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -104,9 +90,30 @@
 \end{ejercicio}
 
 \begin{ejercicio}
+
+	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
+		\modifica{g}
+		\asegura {
+			(\forall j \leftarrow imagenes(pre(g)))\
+			j \in imagenes(g) \land votos(g, j) == votos(pre(g), j) }
+		\asegura {
+			(\forall j \leftarrow imagenes(g), j \neq i)\
+			j \in imagenes(pre(g))
+		}
+		\asegura { i \notin imagenes(pre(g)) \rightarrow ( i \in imagenes(g) \land votos(g, i) == 0) }
+	\end{problema*}
+
 \end{ejercicio}
 
 \begin{ejercicio}
+      \begin{problema*}{votar}{g: Galeria, i: Imagen}
+		\requiere{i \in imagenes(g)}
+		\modifica{g}
+		\asegura{ mismos(imagenes(g), imagenes(pre(g))) }
+		\asegura{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(pre(g), m) == votos(g, m)}
+		\asegura{ votos(pre(g), i) + 1 == votos(g,i)}
+      \end{problema*}
+
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -115,7 +122,7 @@
 		\requiere{|imagenes(g)| > 0}
 		\modifica{g}
 		\asegura{ mismos(imagenes(pre(g)), imagenes(g) ++\  imagenMasVotada(pre(g)))}
-		\asegura{ (\forall i \in imagenes(g))\ votos(g, i) == votos(pre(g), i) }
+		\asegura{ (\forall i \leftarrow imagenes(g))\ votos(g, i) == votos(pre(g), i) }
 	\end{problema*}
 
 
@@ -135,7 +142,7 @@
 	}
 	  
 	\item \auxil{listaSumaCanalesPixeles(i: Imagen) : \TLista{\ent}}{ \newline
-	  [sumaCanales \ | \ y \leftarrow alto(i), x \leftarrow ancho(i), sumaCanales==sumaCanalesPixel(color(i, x, y))]
+	  [sumaCanales \ | \ y \leftarrow [0..alto(i)), x \leftarrow [0..ancho(i)), sumaCanales==sumaCanalesPixel(color(i, x, y))]
 	}
 	
 	\item \auxil{menorSumaCanales(i: Imagen) : \ent}{
@@ -169,9 +176,21 @@
 	\item \auxil{cuentaMenosPixeles(imgs: [Imagen], img: Imagen) : \ent}{ \newline
 	  |[1 \ | \ im \leftarrow imgs, cantPixeles(im)<cantPixeles(img)]|
 	}
+	
+	\item \auxil{cuentaMasVotos(g: Galeria, imgs: [Imagen], img: Imagen) : \ent}{ \newline
+	  |[1 \ | \ im \leftarrow imgs, votos(g,im)>votos(g,img)]|
+	}
 
+	\item \auxil{listaImagenesOrdenadasVotos(g: Galeria, imgs: [Imagen]) : [Imagen]}{ \newline
+	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMasVotos(g,imgs,im)==i]
+	}
+	
 	\item \auxil{listaImagenesOrdenadasTama\tilde{n}o(imgs: [Imagen]) : [Imagen]}{ \newline
 	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMenosPixeles(imgs,im)==i]
+	}
+	
+	\item \auxil{ordenVotosDecreciente(g : Galeria) : [Imagen]}{ \newline
+	  [i | (i \leftarrow imagenes(g), j \leftarrow [0.. |imagenes(g)|), k \leftarrow [0..|imagenes(g)|)), j < k \land votos(g,[j]) \geq votos(g, res[k]) \ ]
 	}
 
 \end{itemize}
