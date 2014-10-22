@@ -133,6 +133,16 @@
 \subsection{Auxiliares}
 
 \begin{itemize}
+	\item \auxil{cuenta(x:T, a:\TLista{T}) : \ent}{ 
+			\longitud {
+			  \TLista{1 \ | \ y \leftarrow a, y==x}
+			}
+	}
+
+	\item \auxil{mismos(a, b: \TLista{T}) : Bool}{ 
+		|a| == |b| \land (\forall c \leftarrow a) cuenta(c,a) == cuenta(c,b)
+	}
+
 	\item \auxil{minimo(l : [\ent]) : \ent}{
 	   [x \ | \ x \leftarrow l ,(\forall y \leftarrow l) x \leq y)][0]
 	}
