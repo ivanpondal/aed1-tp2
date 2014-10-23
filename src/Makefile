@@ -3,7 +3,7 @@ all: clean conv tests reconv main
 clean:
 	rm -f pixel.o imagen.o main tests
 
-tests: pixel.o imagen.o
+tests: pixel.o imagen.o conv
 	g++ -g -o tests tests.cpp pixel.o imagen.o
 	./tests
 
