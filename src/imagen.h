@@ -32,6 +32,7 @@ class Imagen {
   int colorMasOscuro() const;
   bool kVecinosCompletos(int k, int x, int y) const;
   Pixel pixelPromedioKVecinos(int k, int x, int y) const;
+  Pixel pixelMedianaKVecinos(int k, int x, int y) const;
 };
 
 #endif  // IMAGEN_H

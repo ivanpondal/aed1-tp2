@@ -2,5 +2,6 @@
 #define MAIN_H
 
 void doBlur();
+void doAcuarela();
 
 #endif  // MAIN_H

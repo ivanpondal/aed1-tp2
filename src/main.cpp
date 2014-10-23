@@ -34,7 +34,7 @@ int main()
 				doBlur();
 				break;
 			case 2:
-				// TODO acuarela
+				doAcuarela();
 				break;
 			case 3:
 				// TODO cargar galería
@@ -87,6 +87,34 @@ void doBlur(){
 	imagenOriginal.cargar(archivoIn);
 	
 	imagenOriginal.blur(k);
+	
+	archivoOut.open(nombreArchivoOut.c_str());
+	
+	imagenOriginal.guardar(archivoOut);
+	
+	cin.ignore();
+}
+
+void doAcuarela(){
+	int k;
+	string nombreArchivoIn;
+	string nombreArchivoOut;
+	ifstream archivoIn;
+	ofstream archivoOut;
+	Imagen imagenOriginal (0,0);
+	
+	cout << "ingrese el nombre del archivo a modificar:" << endl;
+	cin >> nombreArchivoIn;
+	cout << "ingrese el nombre del archivo de salida:" << endl;
+	cin >> nombreArchivoOut;
+	cout << "ingrese la intensidad del filtro (k):" << endl;
+	cin >> k;
+	
+	archivoIn.open(nombreArchivoIn.c_str());
+	
+	imagenOriginal.cargar(archivoIn);
+	
+	imagenOriginal.acuarela(k);
 	
 	archivoOut.open(nombreArchivoOut.c_str());
 	

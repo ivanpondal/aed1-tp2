@@ -2,6 +2,7 @@
 #include "imagen.h"
 #include "pixel.h"
 
+#include <algorithm>
 #include <vector>
 
 Imagen::Imagen(int alto_param, int ancho_param) {
@@ -76,7 +77,7 @@ vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
   return pixelesOscuros;
 }
 
-// auxiliares para blur
+// auxiliares para blur y acuarela
 
 bool Imagen::kVecinosCompletos(int k, int x, int y) const {
 	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
@@ -138,7 +139,60 @@ void Imagen::blur(int k){
 
 }
 
-// void Imagen::acuarela(int k);
+Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
+	vector<int> red; vector<int> blue; 	vector<int> green;
+	int xi=x-k+1;
+	int yi=y-k+1;
+
+	Pixel pixelMediana;
+
+	while(yi < y+k){
+		Pixel p;
+		while(xi < x+k){
+			p = this->obtenerPixel(yi,xi);
+			red.push_back(p.red());
+			green.push_back(p.green());
+			blue.push_back(p.blue());
+			xi++;
+		}
+		xi=x-k+1;
+		yi++;
+	}
+	
+	sort(red.begin(),red.end());
+	sort(green.begin(),green.end());
+	sort(blue.begin(),blue.end());
+
+	pixelMediana.cambiarPixel(red[red.size()/2-1],green[green.size()/2-1],blue[blue.size()/2-1]);
+	
+	return pixelMediana;
+}
+
+void Imagen::acuarela(int k){
+	Pixel2DContainer pixelsAcuarela;
+	int x=0; int y=0;
+	Pixel pixelNegro(0,0,0);
+	
+	while (y < this->alto()){
+		Pixel1DContainer fila;
+		while(x < this->ancho()){
+			if(this->kVecinosCompletos(k,x,y)){
+				fila.push_back(this->pixelMedianaKVecinos(k,x,y));
+			}
+			else{
+				fila.push_back(pixelNegro);
+			}
+			x++;
+		}
+		pixelsAcuarela.push_back(fila);
+		x=0;
+		y++;
+	}
+
+	this->pixels.clear();
+	this->pixels = pixelsAcuarela;
+
+}
 
 bool Imagen::operator==(const Imagen &otra) const{
 	bool equals=true;
