@@ -1,8 +1,10 @@
+#include "main.h"
 #include "pixel.h"
 #include "imagen.h"
 #include "galeria_imagenes.h"
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -29,7 +31,7 @@ int main()
 
 		switch (selected_action){
 			case 1:
-				// TODO blur
+				doBlur();
 				break;
 			case 2:
 				// TODO acuarela
@@ -63,5 +65,32 @@ int main()
 				break;
 		}
 	}
+}
 
+void doBlur(){
+	int k;
+	string nombreArchivoIn;
+	string nombreArchivoOut;
+	ifstream archivoIn;
+	ofstream archivoOut;
+	Imagen imagenOriginal (0,0);
+	
+	cout << "ingrese el nombre del archivo a modificar:" << endl;
+	cin >> nombreArchivoIn;
+	cout << "ingrese el nombre del archivo de salida:" << endl;
+	cin >> nombreArchivoOut;
+	cout << "ingrese la intensidad del filtro (k):" << endl;
+	cin >> k;
+	
+	archivoIn.open(nombreArchivoIn.c_str());
+	
+	imagenOriginal.cargar(archivoIn);
+	
+	imagenOriginal.blur(k);
+	
+	archivoOut.open(nombreArchivoOut.c_str());
+	
+	imagenOriginal.guardar(archivoOut);
+	
+	cin.ignore();
 }

@@ -12,44 +12,44 @@ Imagen::Imagen(int alto_param, int ancho_param) {
         Pixel p;
         fila.push_back(p);
       }
-      pixels.push_back(fila);
+      this->pixels.push_back(fila);
     }
 
 }
 
 Pixel Imagen::obtenerPixel(int fila, int columna) const {
-    return pixels.at(fila).at(columna);
+    return this->pixels.at(fila).at(columna);
 }
 
 void Imagen::modificarPixel(int fila, int columna, const Pixel &pixel) {
-    pixels.at(fila).at(columna).cambiarPixel(
+    this->pixels.at(fila).at(columna).cambiarPixel(
       pixel.red(), pixel.green(), pixel.blue()
     );
 }
 
 int Imagen::alto() const {
-  return pixels.size();
+  return this->pixels.size();
 }
 
 int Imagen::ancho() const {
-  return pixels.at(0).size();
+  return this->pixels.at(0).size();
 }
 
 //auxiliares para posicionesMasOscuras
 int Imagen::sumaCanales(int x, int y) const {
-    Pixel p = pixels[y][x];
+    Pixel p = this->pixels[y][x];
 	return p.red() + p.green() + p.blue();
 }
 
 int Imagen::colorMasOscuro() const {
 	int x=0; int y=0; 
-	int colorMasOscuro = sumaCanales(0,0);
+	int colorMasOscuro = this->sumaCanales(0,0);
 
 	while (x < this->alto()){
     y=0;
 		while (y < this->ancho()){
-			if (colorMasOscuro > sumaCanales(x,y)){
-				colorMasOscuro = sumaCanales(x,y);
+			if (colorMasOscuro > this->sumaCanales(x,y)){
+				colorMasOscuro = this->sumaCanales(x,y);
 			}
 			y++;
 		}
@@ -66,7 +66,7 @@ vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
   while(x < this->alto()){
       y=0;
     	while(y < this->ancho()){
-    		if(sumaCanales(x,y) == colorMasOscuro) {
+    		if(this->sumaCanales(x,y) == colorMasOscuro) {
     			pixelesOscuros.push_back(pair<int, int>(x,y));
     		}
     		y++;
@@ -76,7 +76,76 @@ vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
   return pixelesOscuros;
 }
 
-// void Imagen::blur(int k);
+// auxiliares para blur
+
+bool Imagen::kVecinosCompletos(int k, int x, int y) const {
+	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
+}
+
+Pixel1DContainer Imagen::kVecinos(int k, int x, int y) const {
+	Pixel1DContainer kVecinos;
+	int xi=x-k+1;
+	int yi=y-k+1;
+	
+	while(yi < y+k){
+		while(xi < x+k){
+			kVecinos.push_back(this->obtenerPixel(yi,xi));
+			xi++;
+		}
+		xi=x-k+1;
+		yi++;
+	}
+	return kVecinos;
+}
+
+Pixel Imagen::pixelPromedioKVecinos(Pixel1DContainer kVecinos) const {
+	int r=0; int g=0; int b=0;int i=0;
+	int totalKVecinos=kVecinos.size();
+	
+	Pixel pixelPromedio;
+	
+	while(i < totalKVecinos){
+		r += kVecinos.at(i).red();
+		g += kVecinos.at(i).green();
+		b += kVecinos.at(i).blue();
+		i++;
+	}
+	
+	r /= totalKVecinos;
+	g /= totalKVecinos;
+	b /= totalKVecinos;
+	
+	pixelPromedio.cambiarPixel(r,g,b);
+	
+	return pixelPromedio;
+}
+
+void Imagen::blur(int k){
+	Pixel2DContainer pixelsBlur;
+	int x=0; int y=0;
+	Pixel pixelNegro(0,0,0);
+	
+	while (y < this->alto()){
+		Pixel1DContainer fila;
+		while(x < this->ancho()){
+			if(this->kVecinosCompletos(k,x,y)){
+				fila.push_back(pixelPromedioKVecinos(this->kVecinos(k,x,y)));
+			}
+			else{
+				fila.push_back(pixelNegro);
+			}
+			x++;
+		}
+		pixelsBlur.push_back(fila);
+		x=0;
+		y++;
+	}
+
+	this->pixels.clear();
+	this->pixels = pixelsBlur;
+
+}
+
 // void Imagen::acuarela(int k);
 //
 // bool Imagen::operator==(const Imagen &otra) const;
@@ -94,7 +163,7 @@ void Imagen::guardar(std::ostream& os) const {
               os << ',';
           }
 
-          pixels[y][x].guardar(os);
+          this->pixels[y][x].guardar(os);
 
       }
   }
@@ -106,7 +175,7 @@ void Imagen::cargar (std::istream& is) {
     int alto, ancho;
     char c;
 
-    pixels.clear();
+    this->pixels.clear();
 
     is >> alto >> ancho;
 
@@ -120,7 +189,7 @@ void Imagen::cargar (std::istream& is) {
         fila.push_back(p);
         is >> c; // ] o ,
       }
-      pixels.push_back(fila);
+      this->pixels.push_back(fila);
     }
 
 }
