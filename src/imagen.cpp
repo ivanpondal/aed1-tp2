@@ -36,40 +36,36 @@ int Imagen::ancho() const {
 }
 
 //auxiliares para posicionesMasOscuras
-int Imagen::sumaCanales(Pixel pixel) const {
-	return pixel.red() + pixel.green() + pixel.blue();
+int Imagen::sumaCanales(int x, int y) const {
+	return pixels[y][x].red() + pixels[y][x].green() + pixels[y][x].blue();
 }
 
-Pixel Imagen::pixelMasOscuro() const {
-	int x=0; int y=0; Pixel pixelMasOscuro = this->obtenerPixel(0,0);
-  Pixel p;
+int Imagen::colorMasOscuro() const {
+	int x=0; int y=0; 
+	int colorMasOscuro = sumaCanales(0,0);
 
-  x=0;
 	while (x < this->alto()){
-
     y=0;
 		while (y < this->ancho()){
-      p = this->obtenerPixel(x, y);
-			if (sumaCanales(pixelMasOscuro) > sumaCanales(p)){
-				pixelMasOscuro=p;
+			if (colorMasOscuro > sumaCanales(x,y)){
+				colorMasOscuro = sumaCanales(x,y);
 			}
 			y++;
 		}
 		x++;
 	}
-	return pixelMasOscuro;
+	return colorMasOscuro;
 }
 
 vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
-  vector<pair<int, int> > pixelesOscuros; int x=0; int y=0;
-  int colorMasOscuro = sumaCanales(this->pixelMasOscuro());
-  Pixel p;
-  x=0;
-  while(x<alto()){
+  vector<pair<int, int> > pixelesOscuros;
+  int x=0; int y=0;
+  int colorMasOscuro = this->colorMasOscuro();
+
+  while(x < this->alto()){
       y=0;
-    	while(y<ancho()){
-        p = pixels[y][x];
-    		if(sumaCanales(p)==colorMasOscuro) {
+    	while(y < this->ancho()){
+    		if(sumaCanales(x,y) == colorMasOscuro) {
     			pixelesOscuros.push_back(pair<int, int>(x,y));
     		}
     		y++;

@@ -28,8 +28,8 @@ class Imagen {
 
  private:
   Pixel2DContainer pixels;
-  int sumaCanales(Pixel pixel) const;
-  Pixel pixelMasOscuro() const;
+  int sumaCanales(int x, int y) const;
+  int colorMasOscuro() const;
 };
 
 #endif  // IMAGEN_H
