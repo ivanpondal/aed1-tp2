@@ -35,7 +35,42 @@ int Imagen::ancho() const {
   return pixels.at(0).size();
 }
 
+//auxiliares para posicionesMasOscuras
+int sumaColores(Pixel rgb) const{
+	return rgb.red() + rgb.green() + rgb.blue();
+}
+
+Pixel pixelMasOscuro(Imagen png) const {
+	int x=0; int y=1; Pixel masOscuro=obtenerPixel(0,0)
+	while (x<alto()){
+		while (y<ancho()){
+			if (sumaColores(masOscuro) > sumaColores(obtenerPixel(x,y))){
+				masOscuro=obtenerPixel;
+			}
+			y++;
+		}
+		y=0;
+		x++;
+	}
+	return masOscuro;
+}
+				
 // vector<pair<int, int> > Imagen::posicionesMasOscuras() const;
+vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
+  std::vector<pair<int, int> > pixelesOscuros; int x=0; int y=0;
+  while(x<alto()){
+	while(y<ancho()){
+		if(sumaColores(obtenerPixel(x,y))==sumaColores(pixelMasOscuro())){
+			pixelesOscuros.push_back(obtenerPixel(x,y));
+			}
+		y++;
+	}
+	y=0;
+	x++;
+  }
+  return pixelesOscuros;
+}	
+  
 // void Imagen::blur(int k);
 // void Imagen::acuarela(int k);
 //
