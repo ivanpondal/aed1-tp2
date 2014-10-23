@@ -3,6 +3,7 @@
 #include "galeria_imagenes.h"
 
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <cassert>
 
@@ -93,6 +94,18 @@ void testImagen() {
   assert (ic.obtenerPixel(1,0) == Pixel(2,    1,231));
   assert (ic.obtenerPixel(1,1) == Pixel(167,161,173));
 
+  //blur
+  ifstream archivoOriginal("../res/hermione.code");
+  ifstream archivoBlurK5("../res/hermione.blur.k5.code");
+  Imagen imagenOriginal(0,0);
+  Imagen imagenBlurK5(0,0);
+
+  imagenOriginal.cargar(archivoOriginal);
+  imagenOriginal.blur(5);
+
+  imagenBlurK5.cargar(archivoBlurK5);
+
+  assert (imagenOriginal == imagenBlurK5);
 
   //posicionesMasOscuras
   Imagen ipmo(2,2);

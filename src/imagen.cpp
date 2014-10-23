@@ -82,33 +82,25 @@ bool Imagen::kVecinosCompletos(int k, int x, int y) const {
 	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
 }
 
-Pixel1DContainer Imagen::kVecinos(int k, int x, int y) const {
-	Pixel1DContainer kVecinos;
+Pixel Imagen::pixelPromedioKVecinos(int k, int x, int y) const {
+	int r=0; int g=0; int b=0;
+	int totalKVecinos=(2*k-1)*(2*k-1);
 	int xi=x-k+1;
 	int yi=y-k+1;
-	
+		
+	Pixel pixelPromedio;
+
 	while(yi < y+k){
+		Pixel p;
 		while(xi < x+k){
-			kVecinos.push_back(this->obtenerPixel(yi,xi));
+			p = this->obtenerPixel(yi,xi);
+			r += p.red();
+			g += p.green();
+			b += p.blue();
 			xi++;
 		}
 		xi=x-k+1;
 		yi++;
-	}
-	return kVecinos;
-}
-
-Pixel Imagen::pixelPromedioKVecinos(Pixel1DContainer kVecinos) const {
-	int r=0; int g=0; int b=0;int i=0;
-	int totalKVecinos=kVecinos.size();
-	
-	Pixel pixelPromedio;
-	
-	while(i < totalKVecinos){
-		r += kVecinos.at(i).red();
-		g += kVecinos.at(i).green();
-		b += kVecinos.at(i).blue();
-		i++;
 	}
 	
 	r /= totalKVecinos;
@@ -129,7 +121,7 @@ void Imagen::blur(int k){
 		Pixel1DContainer fila;
 		while(x < this->ancho()){
 			if(this->kVecinosCompletos(k,x,y)){
-				fila.push_back(pixelPromedioKVecinos(this->kVecinos(k,x,y)));
+				fila.push_back(this->pixelPromedioKVecinos(k,x,y));
 			}
 			else{
 				fila.push_back(pixelNegro);
@@ -147,8 +139,27 @@ void Imagen::blur(int k){
 }
 
 // void Imagen::acuarela(int k);
-//
-// bool Imagen::operator==(const Imagen &otra) const;
+
+bool Imagen::operator==(const Imagen &otra) const{
+	bool equals=true;
+	if(this->ancho() == otra.ancho() && this->alto()== otra.alto()){
+		int x=0; int y=0;	
+		while (y < this->alto() && equals){
+			while(x < this->ancho() && equals){
+				if(this->pixels[y][x] != otra.obtenerPixel(y,x)){
+					equals=false;
+				}
+				x++;
+			}
+			x=0;
+			y++;
+		}
+	}
+	else{
+		equals=false;
+	}
+	return equals;
+}
 
 void Imagen::guardar(std::ostream& os) const {
 
