@@ -37,7 +37,8 @@ int Imagen::ancho() const {
 
 //auxiliares para posicionesMasOscuras
 int Imagen::sumaCanales(int x, int y) const {
-	return pixels[y][x].red() + pixels[y][x].green() + pixels[y][x].blue();
+    Pixel p = pixels[y][x];
+	return p.red() + p.green() + p.blue();
 }
 
 int Imagen::colorMasOscuro() const {
