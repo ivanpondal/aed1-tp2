@@ -2,6 +2,9 @@
 tests
 main
 
+# Compiled specification images
+*.specimg
+
 # Compiled Object files
 *.slo
 *.lo

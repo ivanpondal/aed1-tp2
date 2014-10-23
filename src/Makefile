@@ -1,4 +1,4 @@
-all: clean tests main
+all: clean conv tests main
 
 clean:
 	rm -f pixel.o imagen.o main tests
@@ -15,3 +15,7 @@ pixel.o:
 
 imagen.o:
 	g++ -g -c imagen.cpp
+
+conv:
+	cd ../res && make
+

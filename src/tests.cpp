@@ -95,8 +95,8 @@ void testImagen() {
   assert (ic.obtenerPixel(1,1) == Pixel(167,161,173));
 
   //blur
-  ifstream archivoOriginal("../res/hermione.code");
-  ifstream archivoBlurK5("../res/hermione.blur.k5.code");
+  ifstream archivoOriginal("../res/hermione.specimg");
+  ifstream archivoBlurK5("../res/hermione.blur.k5.specimg");
   Imagen imagenOriginal(0,0);
   Imagen imagenBlurK5(0,0);
 
