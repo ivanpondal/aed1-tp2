@@ -92,4 +92,16 @@ void testImagen() {
   assert (ic.obtenerPixel(0,1) == Pixel(123,121, 31));
   assert (ic.obtenerPixel(1,0) == Pixel(2,    1,231));
   assert (ic.obtenerPixel(1,1) == Pixel(167,161,173));
+
+
+  //posicionesMasOscuras
+  Imagen ipmo(2,2);
+  ipmo.modificarPixel(0,0, rojo);
+  ipmo.modificarPixel(1,1, rojo);
+
+  vector < pair <int, int> > pos;
+  pos = ipmo.posicionesMasOscuras();
+
+  assert(pos[0] == (pair <int, int>(0, 1)));
+  assert(pos[1] == (pair <int, int>(1, 0)));
 }

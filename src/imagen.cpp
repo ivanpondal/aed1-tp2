@@ -36,41 +36,50 @@ int Imagen::ancho() const {
 }
 
 //auxiliares para posicionesMasOscuras
-int sumaColores(Pixel rgb) const{
+int sumaColores(Pixel rgb) {
 	return rgb.red() + rgb.green() + rgb.blue();
 }
 
-Pixel pixelMasOscuro(Imagen png) const {
-	int x=0; int y=1; Pixel masOscuro=obtenerPixel(0,0)
-	while (x<alto()){
-		while (y<ancho()){
-			if (sumaColores(masOscuro) > sumaColores(obtenerPixel(x,y))){
-				masOscuro=obtenerPixel;
+Pixel pixelMasOscuro(Imagen png) {
+	int x=0; int y=0; Pixel masOscuro = png.obtenerPixel(0,0);
+  Pixel p;
+
+  x=0;
+	while (x<png.alto()){
+
+    y=0;
+		while (y<png.ancho()){
+      p = png.obtenerPixel(x, y);
+			if (sumaColores(masOscuro) > sumaColores(p)){
+				masOscuro=p;
 			}
 			y++;
 		}
-		y=0;
 		x++;
 	}
 	return masOscuro;
 }
-				
+
 // vector<pair<int, int> > Imagen::posicionesMasOscuras() const;
 vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
   std::vector<pair<int, int> > pixelesOscuros; int x=0; int y=0;
+  int cmo = sumaColores(pixelMasOscuro(*this));
+  Pixel p;
+  x=0;
   while(x<alto()){
-	while(y<ancho()){
-		if(sumaColores(obtenerPixel(x,y))==sumaColores(pixelMasOscuro())){
-			pixelesOscuros.push_back(obtenerPixel(x,y));
-			}
-		y++;
-	}
-	y=0;
-	x++;
+      y=0;
+    	while(y<ancho()){
+        p = pixels[y][x];
+    		if(sumaColores(p)==cmo) {
+    			pixelesOscuros.push_back(pair<int, int>(x,y));
+    		}
+    		y++;
+    	}
+    	x++;
   }
   return pixelesOscuros;
-}	
-  
+}
+
 // void Imagen::blur(int k);
 // void Imagen::acuarela(int k);
 //
