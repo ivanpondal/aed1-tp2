@@ -20,4 +20,4 @@ conv:
 	cd ../res && make
 
 reconv:
-	cd ../res && python2 ../tools/algo1converter.py hermione.nuestro.blur.k5.specimg filtered/hermione.nuestroblur.k5.png 1
+	cd ../res && python2 ../tools/algo1converter.py hermione.nuestroblur.k6.specimg filtered/hermione.nuestroblur.k6.png 1

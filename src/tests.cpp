@@ -97,14 +97,14 @@ void testImagen() {
   //blur
   ifstream archivoOriginal("../res/hermione.specimg");
   ifstream archivoBlurK5("../res/hermione.blur.k5.specimg");
-  ofstream archivoNuestroBlurK5("../res/hermione.nuestro.blur.k5.specimg");
+  ofstream archivoNuestroBlurK6("../res/hermione.nuestroblur.k6.specimg");
   Imagen imagenOriginal(0,0);
   Imagen imagenBlurK5(0,0);
 
   imagenOriginal.cargar(archivoOriginal);
   imagenOriginal.blur(6);
-  imagenOriginal.guardar(archivoNuestroBlurK5);
-  archivoNuestroBlurK5.close();
+  imagenOriginal.guardar(archivoNuestroBlurK6);
+  archivoNuestroBlurK6.close();
 
   imagenBlurK5.cargar(archivoBlurK5);
 
