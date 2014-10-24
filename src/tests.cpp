@@ -14,8 +14,8 @@ void testImagen();
 void testGaleria();
 int main()
 {
-    //testPixel();
-    //testImagen();
+    testPixel();
+    testImagen();
     testGaleria();
     cout << "Tests OK" << endl;
 }
