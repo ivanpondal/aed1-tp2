@@ -163,7 +163,7 @@ Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
 	sort(green.begin(),green.end());
 	sort(blue.begin(),blue.end());
 
-	pixelMediana.cambiarPixel(red[red.size()/2-1],green[green.size()/2-1],blue[blue.size()/2-1]);
+	pixelMediana.cambiarPixel(red[red.size()/2],green[green.size()/2],blue[blue.size()/2]);
 	
 	return pixelMediana;
 }
