@@ -81,6 +81,37 @@ bool Imagen::kVecinosCompletos(int k, int x, int y) const {
 	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
 }
 
+void Imagen::aplicarFiltro(int filtro, int k) {
+	Pixel2DContainer pixelsFiltro;
+	int x=0; int y=0;
+	Pixel pixel(0,0,0);
+	
+	while (y < this->alto()){
+		Pixel1DContainer fila;
+		while(x < this->ancho()){
+			if(this->kVecinosCompletos(k,x,y)){
+				switch(filtro){
+					case BLUR:
+						pixel = this->pixelPromedioKVecinos(k,x,y);
+						break;
+					case ACUARELA:
+						pixel = this->pixelMedianaKVecinos(k,x,y);
+						break;
+				}
+			}
+			fila.push_back(pixel);
+			pixel.cambiarPixel(0,0,0);
+			x++;
+		}
+		pixelsFiltro.push_back(fila);
+		x=0;
+		y++;
+	}
+
+	this->pixels.clear();
+	this->pixels = pixelsFiltro;
+}
+
 Pixel Imagen::pixelPromedioKVecinos(int k, int x, int y) const {
 	int r=0; int g=0; int b=0;
 	int totalKVecinos=(2*k-1)*(2*k-1);
@@ -109,32 +140,6 @@ Pixel Imagen::pixelPromedioKVecinos(int k, int x, int y) const {
 	pixelPromedio.cambiarPixel(r,g,b);
 	
 	return pixelPromedio;
-}
-
-void Imagen::blur(int k){
-	Pixel2DContainer pixelsBlur;
-	int x=0; int y=0;
-	Pixel pixelNegro(0,0,0);
-	
-	while (y < this->alto()){
-		Pixel1DContainer fila;
-		while(x < this->ancho()){
-			if(this->kVecinosCompletos(k,x,y)){
-				fila.push_back(this->pixelPromedioKVecinos(k,x,y));
-			}
-			else{
-				fila.push_back(pixelNegro);
-			}
-			x++;
-		}
-		pixelsBlur.push_back(fila);
-		x=0;
-		y++;
-	}
-
-	this->pixels.clear();
-	this->pixels = pixelsBlur;
-
 }
 
 Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
@@ -176,31 +181,12 @@ Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
   return pixelMediana;
 }
 
+void Imagen::blur(int k){
+	this->aplicarFiltro(BLUR, k);
+}
 
 void Imagen::acuarela(int k){
-	Pixel2DContainer pixelsAcuarela;
-	int x=0; int y=0;
-	Pixel pixelNegro(0,0,0);
-	
-	while (y < this->alto()){
-		Pixel1DContainer fila;
-		while(x < this->ancho()){
-			if(this->kVecinosCompletos(k,x,y)){
-				fila.push_back(this->pixelMedianaKVecinos(k,x,y));
-			}
-			else{
-				fila.push_back(pixelNegro);
-			}
-			x++;
-		}
-		pixelsAcuarela.push_back(fila);
-		x=0;
-		y++;
-	}
-
-	this->pixels.clear();
-	this->pixels = pixelsAcuarela;
-
+	this->aplicarFiltro(ACUARELA, k);
 }
 
 bool Imagen::operator==(const Imagen &otra) const{

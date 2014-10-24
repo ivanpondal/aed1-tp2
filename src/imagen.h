@@ -1,13 +1,15 @@
 #ifndef IMAGEN_H
 #define IMAGEN_H
 
+#define BLUR 0
+#define ACUARELA 1
+
 #include "pixel.h"
 
 #include <vector>
 
 typedef std::vector<Pixel> Pixel1DContainer;
 typedef std::vector<Pixel1DContainer> Pixel2DContainer;
-
 
 
 class Imagen {
@@ -31,6 +33,7 @@ class Imagen {
   int sumaCanales(int x, int y) const;
   int colorMasOscuro() const;
   bool kVecinosCompletos(int k, int x, int y) const;
+  void aplicarFiltro(int filtro, int k);
   Pixel pixelPromedioKVecinos(int k, int x, int y) const;
   Pixel pixelMedianaKVecinos(int k, int x, int y) const;
 };

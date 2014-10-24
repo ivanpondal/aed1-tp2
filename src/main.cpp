@@ -1,4 +1,3 @@
-#include "main.h"
 #include "pixel.h"
 #include "imagen.h"
 #include "galeria_imagenes.h"
@@ -7,6 +6,8 @@
 #include <fstream>
 
 using namespace std;
+
+void doFilter(int filter);
 
 int main()
 {
@@ -31,10 +32,10 @@ int main()
 
 		switch (selected_action){
 			case 1:
-				doBlur();
+				doFilter(BLUR);
 				break;
 			case 2:
-				doAcuarela();
+				doFilter(ACUARELA);
 				break;
 			case 3:
 				// TODO cargar galería
@@ -67,7 +68,7 @@ int main()
 	}
 }
 
-void doBlur(){
+void doFilter(int filter){
 	int k;
 	string nombreArchivoIn;
 	string nombreArchivoOut;
@@ -85,40 +86,16 @@ void doBlur(){
 	archivoIn.open(nombreArchivoIn.c_str());
 	
 	imagenOriginal.cargar(archivoIn);
-	
-	imagenOriginal.blur(k);
-	
-	archivoOut.open(nombreArchivoOut.c_str());
-	
-	imagenOriginal.guardar(archivoOut);
-	
-	cin.ignore();
-}
-
-void doAcuarela(){
-	int k;
-	string nombreArchivoIn;
-	string nombreArchivoOut;
-	ifstream archivoIn;
-	ofstream archivoOut;
-	Imagen imagenOriginal (0,0);
-	
-	cout << "ingrese el nombre del archivo a modificar:" << endl;
-	cin >> nombreArchivoIn;
-	cout << "ingrese el nombre del archivo de salida:" << endl;
-	cin >> nombreArchivoOut;
-	cout << "ingrese la intensidad del filtro (k):" << endl;
-	cin >> k;
-	
-	archivoIn.open(nombreArchivoIn.c_str());
-	
-	imagenOriginal.cargar(archivoIn);
-	
-	imagenOriginal.acuarela(k);
+	switch(filter){
+		case BLUR:
+			imagenOriginal.blur(k);
+			break;
+		case ACUARELA:
+			imagenOriginal.acuarela(k);
+			break;
+	}
 	
 	archivoOut.open(nombreArchivoOut.c_str());
 	
 	imagenOriginal.guardar(archivoOut);
-	
-	cin.ignore();
 }
