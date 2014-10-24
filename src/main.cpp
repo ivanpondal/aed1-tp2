@@ -8,6 +8,7 @@
 using namespace std;
 
 void doFilter(int filter);
+void doPosicionesMasOscuras();
 
 int main()
 {
@@ -44,7 +45,7 @@ int main()
 				// TODO dividirYAgregar
 				break;
 			case 5:
-				// TODO posicionesMásOscuras
+				doPosicionesMasOscuras();
 				break;
 			case 6:
 				// TODO top 10
@@ -98,4 +99,37 @@ void doFilter(int filter){
 	archivoOut.open(nombreArchivoOut.c_str());
 	
 	imagenOriginal.guardar(archivoOut);
+}
+
+void doPosicionesMasOscuras(){
+	string nombreArchivoIn;
+	ifstream archivoIn;
+	Imagen imagenOriginal (0,0);
+
+	cout << "ingrese el nombre del archivo a leer:" << endl;
+
+	cin >> nombreArchivoIn;
+
+	archivoIn.open(nombreArchivoIn.c_str());
+
+	imagenOriginal.cargar(archivoIn);
+
+	vector < pair <int, int> > pos;
+	pos = imagenOriginal.posicionesMasOscuras();
+
+	int i;
+
+	cout << "[";
+
+	for(i=0; i<pos.size() ; i++){
+		if(i == pos.size()-1){
+			cout << "(" << pos[i].first << "," << pos[i].second << ")";
+		}else{
+			cout << "(" << pos[i].first << "," << pos[i].second << "),";
+		}
+	}
+
+	cout << "]";
+
+	//TODO falta agregar galeria
 }
