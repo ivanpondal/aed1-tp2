@@ -59,7 +59,7 @@ def spec2pic():
 			for j in xrange(w):
 				img[i][j]= map(int,raw_img[(i*w)+j].split(';'))
 
-		# img= imgFilter(img,6)
+		# img= imgFilter(img,5)
 
 		img= np.array(img)
 		cv2.imwrite(outfile,img)
@@ -89,7 +89,6 @@ def blackBox(h,w):
 	return [ [pxBlack() for l in xrange(w)] for k in xrange(h) ]
 
 def imgFilter(img,k):
-
 	h,w= len(img),len(img[0])
 	res= blackBox(h,w)
 	for x in xrange(w):
