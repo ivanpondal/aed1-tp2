@@ -133,6 +133,7 @@ void testImagen() {
   //assert (imagenOriginal2 == imagenAcuarelaK5);
 
   //posicionesMasOscuras
+  //ejemplo fruta
   Imagen ipmo(2,2);
   ipmo.modificarPixel(0,0, rojo);
   ipmo.modificarPixel(1,1, rojo);
@@ -142,4 +143,10 @@ void testImagen() {
 
   assert(pos[0] == (pair <int, int>(0, 1)));
   assert(pos[1] == (pair <int, int>(1, 0)));
+
+  //poder calcularlo en imagenes de verdad
+  vector < pair <int, int> > hermioneBlurPosicionesMasOscuras;
+  hermioneBlurPosicionesMasOscuras = imagenBlurK5.posicionesMasOscuras();
+
+
 }

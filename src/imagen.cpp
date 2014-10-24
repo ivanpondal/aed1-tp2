@@ -43,12 +43,11 @@ int Imagen::sumaCanales(int x, int y) const {
 }
 
 int Imagen::colorMasOscuro() const {
-	int x=0; int y=0; 
+	int x=0; int y=0;
 	int colorMasOscuro = this->sumaCanales(0,0);
-
-	while (x < this->alto()){
+	while (x < this->ancho()){
     y=0;
-		while (y < this->ancho()){
+		while (y < this->alto()){
 			if (colorMasOscuro > this->sumaCanales(x,y)){
 				colorMasOscuro = this->sumaCanales(x,y);
 			}
@@ -63,10 +62,9 @@ vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
   vector<pair<int, int> > pixelesOscuros;
   int x=0; int y=0;
   int colorMasOscuro = this->colorMasOscuro();
-
-  while(x < this->alto()){
+  while(x < this->ancho()){
       y=0;
-    	while(y < this->ancho()){
+    	while(y < this->alto()){
     		if(this->sumaCanales(x,y) == colorMasOscuro) {
     			pixelesOscuros.push_back(pair<int, int>(x,y));
     		}
