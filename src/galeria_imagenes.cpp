@@ -24,7 +24,17 @@ void GaleriaImagenes::eliminarMasVotada() {
 }
 
 vector <Imagen> GaleriaImagenes::top10() const {
-//TODO
+    int k = this->imagenes.size() - 1;
+    int i;
+    vector <Imagen> res;
+
+    i = k;
+    while ((i > k-10) && (i >= 0)) {
+        res.push_back(this->imagenes[i]);
+        i--;
+    }
+
+    return res;
 }
 
 void GaleriaImagenes::guardar (std::ostream& os) const {

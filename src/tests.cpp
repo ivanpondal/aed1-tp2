@@ -159,8 +159,70 @@ void testGaleria() {
   istringstream iss(galeriaInString.c_str());
   ostringstream oss;
 
+  vector <Imagen> vim;
   GaleriaImagenes g;
+  int i;
   g.cargar(iss);
   g.guardar(oss);
   assert (oss.str() == galeriaOutString);
+
+  int res_t10_4[] = {4,3,2,1};
+  string gist10_4 = "["
+                        "(1 1 [(1;1;1)],1),"
+                        "(1 1 [(4;4;4)],4),"
+                        "(1 1 [(3;3;3)],3),"
+                        "(1 1 [(2;2;2)],2)"
+                    "]";
+  int res_t10_10[] = {9,8,7,6,5,4,3,2,1,0};
+  string gist10_10 = "["
+                        "(1 1 [(1;1;1)],1),"
+                        "(1 1 [(4;4;4)],4),"
+                        "(1 1 [(3;3;3)],3),"
+                        "(1 1 [(2;2;2)],2),"
+                        "(1 1 [(6;6;6)],6),"
+                        "(1 1 [(8;8;8)],8),"
+                        "(1 1 [(9;9;9)],9),"
+                        "(1 1 [(5;5;5)],5),"
+                        "(1 1 [(7;7;7)],7),"
+                        "(1 1 [(0;0;0)],0)"
+                    "]";
+  int res_t10_12[] = {500,100,9,8,7,6,5,4,3,2};
+  string gist10_12 = "["
+                        "(1 1 [(1;1;1)],1),"
+                        "(1 1 [(4;4;4)],4),"
+                        "(1 1 [(3;3;3)],3),"
+                        "(1 1 [(2;2;2)],2),"
+                        "(1 1 [(6;6;6)],6),"
+                        "(1 1 [(8;8;8)],8),"
+                        "(1 1 [(9;9;9)],9),"
+                        "(1 1 [(5;5;5)],5),"
+                        "(1 1 [(7;7;7)],7),"
+                        "(1 1 [(0;0;0)],0),"
+                        "(1 1 [(100;100;100)],100),"
+                        "(1 1 [(500;500;500)],500)"
+                      "]";
+
+  istringstream iss4(gist10_4.c_str());
+  g.cargar(iss4);
+
+  vim = g.top10();
+  for (i=0; i<vim.size(); i++) {
+    assert(vim[i].obtenerPixel(0,0).red() == res_t10_4[i]);
+  }
+
+  istringstream iss10(gist10_10.c_str());
+  g.cargar(iss10);
+
+  vim = g.top10();
+  for (i=0; i<vim.size(); i++) {
+    assert(vim[i].obtenerPixel(0,0).red() == res_t10_10[i]);
+  }
+
+  istringstream iss12(gist10_12.c_str());
+  g.cargar(iss12);
+
+  vim = g.top10();
+  for (i=0; i<vim.size(); i++) {
+    assert(vim[i].obtenerPixel(0,0).red() == res_t10_12[i]);
+  }
 }
