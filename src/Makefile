@@ -20,5 +20,5 @@ conv:
 	cd ../res && make
 
 reconv:
-	cd ../res && python2 ../tools/algo1converter.py hermione.nuestroblur.k6.specimg filtered/hermione.nuestroblur.k6.png 1
-	cd ../res && python2 ../tools/algo1converter.py hermione.nuestroacuarela.k6.specimg filtered/hermione.nuestroacuarela.k6.png 1
+	cd ../res && python2 ../tools/algo1converter.py hermione.blurnuestro.k5.specimg filtered/hermione.blurnuestro.k5.png 1
+	cd ../res && python2 ../tools/algo1converter.py hermione.acuarelanuestro.k5.specimg filtered/hermione.acuarelanuestro.k5.png 1

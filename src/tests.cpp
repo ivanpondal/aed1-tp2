@@ -101,8 +101,8 @@ void testImagen() {
   ifstream archivoBlurK5("../res/hermione.blur.k5.specimg");
   ifstream archivoAcuarelaK5("../res/hermione.acuarela.k5.specimg");
 
-  ofstream archivoNuestroBlurK6("../res/hermione.nuestroblur.k6.specimg");
-  ofstream archivoNuestroAcuarelaK6("../res/hermione.nuestroacuarela.k6.specimg");
+  ofstream archivoBlurNuestroK5("../res/hermione.blurnuestro.k5.specimg");
+  ofstream archivoAcuarelaNuestroK5("../res/hermione.acuarelanuestro.k5.specimg");
 
   Imagen imagenOriginal(0,0);
   Imagen imagenOriginal2(0,0);
@@ -113,14 +113,14 @@ void testImagen() {
   imagenOriginal.cargar(archivoOriginal);
   imagenOriginal2.cargar(archivoOriginal2);
 
-  imagenOriginal.blur(6);
-  imagenOriginal2.acuarela(6);
+  imagenOriginal.blur(5);
+  imagenOriginal2.acuarela(5);
 
-  imagenOriginal.guardar(archivoNuestroBlurK6);
-  imagenOriginal2.guardar(archivoNuestroAcuarelaK6);
+  imagenOriginal.guardar(archivoBlurNuestroK5);
+  imagenOriginal2.guardar(archivoAcuarelaNuestroK5);
 
-  archivoNuestroBlurK6.close();
-  archivoNuestroAcuarelaK6.close();
+  archivoBlurNuestroK5.close();
+  archivoAcuarelaNuestroK5.close();
 
   imagenBlurK5.cargar(archivoBlurK5);
   imagenAcuarelaK5.cargar(archivoAcuarelaK5);
