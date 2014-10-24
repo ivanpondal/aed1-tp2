@@ -11,11 +11,12 @@ using namespace std;
 
 void testPixel();
 void testImagen();
-
+void testGaleria();
 int main()
 {
-    testPixel();
-    testImagen();
+    //testPixel();
+    //testImagen();
+    testGaleria();
     cout << "Tests OK" << endl;
 }
 
@@ -149,4 +150,16 @@ void testImagen() {
   hermioneBlurPosicionesMasOscuras = imagenBlurK5.posicionesMasOscuras();
 
 
+}
+
+void testGaleria() {
+  string galeriaString = "[(2 2 [(1;2;3),(123;121;312),(2;1;231),(167;161;173)],5),(2 1 [(1;2;3),(123;121;312)],20)]";
+
+  istringstream iss(galeriaString.c_str());
+  ostringstream oss;
+
+  GaleriaImagenes g;
+  g.cargar(iss);
+  g.guardar(oss);
+  assert (oss.str() == galeriaString);
 }
