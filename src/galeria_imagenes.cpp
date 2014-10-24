@@ -79,9 +79,11 @@ void GaleriaImagenes::acomodar() {
   int    av;
 
   int i, j;
+  //CabezaSort
   for(i=0; i<this->votos.size(); i++) {
-    for(j=0; j<this->votos.size(); j++){
-      if (this->votos[i] < this->votos[j]) {
+    for(j=i+1; j<this->votos.size(); j++){
+
+      if (this->votos[i] > this->votos[j]) {
         ai = this->imagenes[i];
         av = this->votos[i];
 
