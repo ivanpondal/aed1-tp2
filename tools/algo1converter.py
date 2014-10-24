@@ -59,7 +59,7 @@ def spec2pic():
 			for j in xrange(w):
 				img[i][j]= map(int,raw_img[(i*w)+j].split(';'))
 
-		# img= imgFilter(img,3)
+		img= imgFilter(img,6)
 
 		img= np.array(img)
 		cv2.imwrite(outfile,img)
@@ -71,8 +71,8 @@ def pixel2str(img,i,j):
 
 def kNeigh(img,k,x,y):
 	pxs= []
-	for i in xrange(x-k,x+k+1):
-		for j in xrange(y-k,y+k+1):
+	for i in xrange(x-k+1,x+k):
+		for j in xrange(y-k+1,y+k):
 			pxs.append(img[j][i])
 	return pxs
 
@@ -86,14 +86,15 @@ def pxBlack():
 	return (0,0,0)
 
 def blackBox(h,w):
-	return [ [pxBlack()]*w for k in xrange(h) ]
+	return [ [pxBlack() for l in xrange(w)] for k in xrange(h) ]
 
 def imgFilter(img,k):
-	res= list(img)
+
 	h,w= len(img),len(img[0])
+	res= blackBox(h,w)
 	for x in xrange(w):
 		for y in xrange(h):
-			if x >= k and x < w-k and y >= k and y < h-k:
+			if x >= k-1 and x < w-k+1 and y >= k-1 and y < h-k+1:
 
 				""" blur """
 				res[y][x]= applyFilter(kNeigh(img,k,x,y),np.mean)
