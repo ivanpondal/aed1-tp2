@@ -110,8 +110,8 @@
 		\requiere{i \in imagenes(g)}
 		\modifica{g}
 		\asegura{ mismos(imagenes(g), imagenes(pre(g))) }
-		\asegura{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(pre(g), m) == votos(g, m)}
-		\asegura{ votos(pre(g), i) + 1 == votos(g,i)}
+		\asegura{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(g, m) == votos(pre(g), m)}
+		\asegura{ votos(g,i) == votos(pre(g), i) + 1 }
       \end{problema*}
 
 \end{ejercicio}
