@@ -88,6 +88,9 @@ def pxBlack():
 def blackBox(h,w):
 	return [ [pxBlack() for l in xrange(w)] for k in xrange(h) ]
 
+def mean_int(xs):
+    return np.mean(xs, dtype=int)
+
 def imgFilter(img,k):
 	h,w= len(img),len(img[0])
 	res= blackBox(h,w)
@@ -96,7 +99,7 @@ def imgFilter(img,k):
 			if x >= k-1 and x < w-k+1 and y >= k-1 and y < h-k+1:
 
 				""" blur """
-				res[y][x]= applyFilter(kNeigh(img,k,x,y),np.mean)
+				res[y][x]= applyFilter(kNeigh(img,k,x,y),mean_int)
 
 				""" acuarela """
 				# res[y][x]= applyFilter(kNeigh(img,k,x,y),np.median)
