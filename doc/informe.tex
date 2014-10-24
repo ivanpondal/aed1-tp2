@@ -74,10 +74,10 @@
 \begin{ejercicio}
 	\begin{problema}{top10}{g: Galeria}{result : [Imagen]}
 		\asegura{
-			(|imagenes(g)|<10) \rightarrow listaImagenesOrdenadasVotos(g, imagenes(g))
+			(|imagenes(g)|<10) \rightarrow \newline result == listaImagenesOrdenadasVotos(g, imagenes(g))
 		}
 		\asegura{
-			(|imagenes(g)| \geq 10) \rightarrow listaImagenesOrdenadasVotos(g, imagenes(g))[0$..$10)
+			(|imagenes(g)| \geq 10) \rightarrow \newline result == listaImagenesOrdenadasVotos(g, imagenes(g))[0$..$10)
 		}
 	\end{problema}
 \end{ejercicio}
@@ -133,13 +133,13 @@
 \subsection{Auxiliares}
 
 \begin{itemize}
-	\item \auxil{cuenta(x:T, a:\TLista{T}) : \ent}{ 
+	\item \auxil{cuenta(x:T, a:\TLista{T}) : \ent}{
 			\longitud {
 			  \TLista{1 \ | \ y \leftarrow a, y==x}
 			}
 	}
 
-	\item \auxil{mismos(a, b: \TLista{T}) : Bool}{ 
+	\item \auxil{mismos(a, b: \TLista{T}) : Bool}{
 		|a| == |b| \land (\forall c \leftarrow a) cuenta(c,a) == cuenta(c,b)
 	}
 
@@ -150,15 +150,15 @@
 	\item \auxil{sumaCanalesPixel(p : Pixel) : \ent}{
 	   red(p) + green(p) + blue(p)
 	}
-	  
+
 	\item \auxil{listaSumaCanalesPixeles(i: Imagen) : \TLista{\ent}}{ \newline
 	  [sumaCanales \ | \ y \leftarrow [0..alto(i)), x \leftarrow [0..ancho(i)), sumaCanales==sumaCanalesPixel(color(i, x, y))]
 	}
-	
+
 	\item \auxil{menorSumaCanales(i: Imagen) : \ent}{
 	  minimo(listaSumaCanalesPixeles(i))
 	}
-	
+
 	\item \auxil{imagenMasVotada(g: Galeria) : Imagen} { \newline
 	  [i \ | \ i \leftarrow imagenes(g), votos(g,i) == max(todosLosVotos(g)) ]
 	}
@@ -170,15 +170,15 @@
 	\item \auxil{cantPixeles(i: Imagen) : \ent}{
 	  ancho(i)*alto(i)
 	}
-	
+
 	\item \auxil{esPixelBlanco(px: Pixel) : Bool}{
 	  red(px) == green(px) == blue(px) == 255
 	}
-	
+
 	\item \auxil{tienePixelBlanco(i: Imagen) : Bool}{ \newline
 	  alguno([esPixelBlanco(color(i,x,y)) | y \leftarrow [0..alto(i)),x \leftarrow [0..ancho(i))])
 	}
-	
+
 	\item \auxil{listaImagenesConPixelBlanco(imgs: [Imagen]) : [Imagen]}{
 	  [im \ | \ im \leftarrow imgs, tienePixelBlanco(im)]
 	}
@@ -186,7 +186,7 @@
 	\item \auxil{cuentaMenosPixeles(imgs: [Imagen], img: Imagen) : \ent}{ \newline
 	  |[1 \ | \ im \leftarrow imgs, cantPixeles(im)<cantPixeles(img)]|
 	}
-	
+
 	\item \auxil{cuentaMasVotos(g: Galeria, imgs: [Imagen], img: Imagen) : \ent}{ \newline
 	  |[1 \ | \ im \leftarrow imgs, votos(g,im)>votos(g,img)]|
 	}
@@ -194,7 +194,7 @@
 	\item \auxil{listaImagenesOrdenadasVotos(g: Galeria, imgs: [Imagen]) : [Imagen]}{ \newline
 	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMasVotos(g,imgs,im)==i]
 	}
-	
+
 	\item \auxil{listaImagenesOrdenadasTama\tilde{n}o(imgs: [Imagen]) : [Imagen]}{ \newline
 	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMenosPixeles(imgs,im)==i]
 	}
