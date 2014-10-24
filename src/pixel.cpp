@@ -28,17 +28,17 @@ int Pixel::blue() const {
 
 bool Pixel::operator==(const Pixel &p) const {
    return (
-            (intensidades[0] == p.intensidades[0]) &&
-            (intensidades[1] == p.intensidades[1]) &&
-            (intensidades[2] == p.intensidades[2])
+            (intensidades[0] == p.red()) &&
+            (intensidades[1] == p.green()) &&
+            (intensidades[2] == p.blue())
           );
 }
 
 bool Pixel::operator!=(const Pixel &p) const {
    return (
-            (intensidades[0] != p.intensidades[0]) ||
-            (intensidades[1] != p.intensidades[1]) ||
-            (intensidades[2] != p.intensidades[2])
+            (intensidades[0] != p.red()) ||
+            (intensidades[1] != p.green()) ||
+            (intensidades[2] != p.blue())
           );
 }
 
