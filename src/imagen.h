@@ -32,6 +32,8 @@ class Imagen {
   Pixel2DContainer pixels;
   int sumaCanales(int x, int y) const;
   int colorMasOscuro() const;
+  int maxPos(const int a[], int desde, int hasta) const;
+  void upSort(int a[], int n) const;
   bool kVecinosCompletos(int k, int x, int y) const;
   void aplicarFiltro(int filtro, int k);
   Pixel pixelPromedioKVecinos(int k, int x, int y) const;

@@ -77,6 +77,27 @@ vector<pair<int, int> > Imagen::posicionesMasOscuras() const {
 
 // auxiliares para blur y acuarela
 
+int Imagen::maxPos(const int a[], int desde, int hasta) const{
+	int maxPos = desde;
+	int i = desde + 1;
+	while (i <= hasta) {
+		if (a[i] > a[maxPos]) maxPos = i;
+		i++;
+	}
+	return maxPos;
+}
+
+void Imagen::upSort(int a[], int n) const{
+	int pos; int valorActual; int actual = n - 1;
+	while (actual > 0) {
+		pos = maxPos(a ,0 ,actual);
+		valorActual = a[actual];
+		a[actual] = a[pos];
+		a[pos] = valorActual;
+		actual--;
+	}
+}
+
 bool Imagen::kVecinosCompletos(int k, int x, int y) const {
 	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
 }
@@ -168,16 +189,12 @@ Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
     xi=x-k+1;
     yi++;
   }
-  
-  vector<int> redVector(red, red + sizeKVecinos);
-  vector<int> greenVector(green, green + sizeKVecinos);
-  vector<int> blueVector(blue, blue + sizeKVecinos);
 
-  nth_element(redVector.begin(),redVector.begin()+middleKVecinos,redVector.end());
-  nth_element(greenVector.begin(),greenVector.begin()+middleKVecinos,greenVector.end());
-  nth_element(blueVector.begin(),blueVector.begin()+middleKVecinos,blueVector.end());
-  
-  pixelMediana.cambiarPixel(redVector[middleKVecinos],greenVector[middleKVecinos],blueVector[middleKVecinos]);
+  upSort(red, sizeKVecinos);
+  upSort(green, sizeKVecinos);
+  upSort(blue, sizeKVecinos);
+
+  pixelMediana.cambiarPixel(red[middleKVecinos], green[middleKVecinos], blue[middleKVecinos]);
   return pixelMediana;
 }
 
