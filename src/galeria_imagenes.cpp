@@ -27,15 +27,17 @@ vector <Imagen> GaleriaImagenes::top10() const {
 //TODO
 }
 
-void GaleriaImagenes::guardar(std::ostream& os) const {
+void GaleriaImagenes::guardar (std::ostream& os) const {
 
   int i = 0;
   os << '[';
 
   while(i < this->imagenes.size()) {
+
       if (i>0) {
         os << ',';
       }
+
       os << '(';
       this->imagenes[i].guardar(os);
       os << ',';
@@ -59,15 +61,36 @@ void GaleriaImagenes::cargar (std::istream& is) {
   this->votos.clear();
 
   while(is >> c) { // [,]
-      if (is >> c) { // (
+    if (is >> c) { // (
 
-        img.cargar(is);
-        is >> c; // ,
-        is >> vts;
-        is >> c; // )
-        this->imagenes.push_back(img);
-        this->votos.push_back(vts);
-      }
+      img.cargar(is);
+      is >> c; // ,
+      is >> vts;
+      is >> c; // )
+      this->imagenes.push_back(img);
+      this->votos.push_back(vts);
+    }
   }
+  this->acomodar();
+}
 
+void GaleriaImagenes::acomodar() {
+  Imagen ai(0,0);
+  int    av;
+
+  int i, j;
+  for(i=0; i<this->votos.size(); i++) {
+    for(j=0; j<this->votos.size(); j++){
+      if (this->votos[i] < this->votos[j]) {
+        ai = this->imagenes[i];
+        av = this->votos[i];
+
+        this->imagenes[i] = this->imagenes[j];
+        this->votos[i] = this->votos[j];
+
+        this->imagenes[j] = ai;
+        this->votos[j] = av;
+      }
+    }
+  }
 }

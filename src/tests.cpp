@@ -153,13 +153,14 @@ void testImagen() {
 }
 
 void testGaleria() {
-  string galeriaString = "[(2 2 [(1;2;3),(123;121;312),(2;1;231),(167;161;173)],5),(2 1 [(1;2;3),(123;121;312)],20)]";
+  string galeriaInString  = "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),(1 1 [(2;2;2)],2)]";
+  string galeriaOutString = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
 
-  istringstream iss(galeriaString.c_str());
+  istringstream iss(galeriaInString.c_str());
   ostringstream oss;
 
   GaleriaImagenes g;
   g.cargar(iss);
   g.guardar(oss);
-  assert (oss.str() == galeriaString);
+  assert (oss.str() == galeriaOutString);
 }
