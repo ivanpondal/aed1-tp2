@@ -140,33 +140,44 @@ void Imagen::blur(int k){
 }
 
 Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
-	vector<int> red; vector<int> blue; 	vector<int> green;
-	int xi=x-k+1;
-	int yi=y-k+1;
+  int xi = x-k+1;
+  int yi = y-k+1;
+  int sizeKVecinos = (2*k-1)*(2*k-1);
+  int middleKVecinos = sizeKVecinos/2;
+  int* red = new int[sizeKVecinos];
+  int* green = new int[sizeKVecinos];
+  int* blue = new int[sizeKVecinos];
+  int i = 0;
 
-	Pixel pixelMediana;
+  Pixel pixelMediana;
 
-	while(yi < y+k){
-		Pixel p;
-		while(xi < x+k){
-			p = this->obtenerPixel(yi,xi);
-			red.push_back(p.red());
-			green.push_back(p.green());
-			blue.push_back(p.blue());
-			xi++;
-		}
-		xi=x-k+1;
-		yi++;
-	}
-	
-	sort(red.begin(),red.end());
-	sort(green.begin(),green.end());
-	sort(blue.begin(),blue.end());
+  while(yi < y+k){
+    Pixel p;
+    while(xi < x+k){
+      p = this->obtenerPixel(yi,xi);
+      red[i] = p.red();
+      green[i] = p.green();
+      blue[i] = p.blue();
+      
+      i++;
+      xi++;
+    }
+    xi=x-k+1;
+    yi++;
+  }
+  
+  vector<int> redVector(red, red + sizeKVecinos);
+  vector<int> greenVector(green, green + sizeKVecinos);
+  vector<int> blueVector(blue, blue + sizeKVecinos);
 
-	pixelMediana.cambiarPixel(red[red.size()/2],green[green.size()/2],blue[blue.size()/2]);
-	
-	return pixelMediana;
+  nth_element(redVector.begin(),redVector.begin()+middleKVecinos,redVector.end());
+  nth_element(greenVector.begin(),greenVector.begin()+middleKVecinos,greenVector.end());
+  nth_element(blueVector.begin(),blueVector.begin()+middleKVecinos,blueVector.end());
+  
+  pixelMediana.cambiarPixel(redVector[middleKVecinos],greenVector[middleKVecinos],blueVector[middleKVecinos]);
+  return pixelMediana;
 }
+
 
 void Imagen::acuarela(int k){
 	Pixel2DContainer pixelsAcuarela;
