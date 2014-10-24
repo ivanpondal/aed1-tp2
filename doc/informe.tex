@@ -65,8 +65,8 @@
 \begin{ejercicio}
 
 	\begin{problema}{posicionesMasOscuras}{i:Imagen}{res:[(\ent, \ent)]}
-		\asegura{res == [(x,y) \ | \ y \leftarrow [0..alto(i)),x \leftarrow [0..ancho(i)),
-		\newline sumaCanalesPixel(color(i, x, y)) == menorSumaCanales(i)] }
+		\asegura{mismos(res, [(x,y) \ | \ y \leftarrow [0..alto(i)),x \leftarrow [0..ancho(i)),
+		\newline sumaCanalesPixel(color(i, x, y)) == menorSumaCanales(i)]) }
 	\end{problema}
 
 \end{ejercicio}
@@ -152,7 +152,7 @@
 	}
 
 	\item \auxil{listaSumaCanalesPixeles(i: Imagen) : \TLista{\ent}}{ \newline
-	  [sumaCanales \ | \ y \leftarrow [0..alto(i)), x \leftarrow [0..ancho(i)), sumaCanales==sumaCanalesPixel(color(i, x, y))]
+	  [ sumaCanalesPixel(color(i, x, y))\ | \ y \leftarrow [0..alto(i)), x \leftarrow [0..ancho(i))]
 	}
 
 	\item \auxil{menorSumaCanales(i: Imagen) : \ent}{
