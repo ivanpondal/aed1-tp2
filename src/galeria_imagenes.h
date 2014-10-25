@@ -19,6 +19,7 @@ class GaleriaImagenes {
 
  private:
   void acomodar();
+  bool existeImagen(const Imagen &imagen);
   std::vector<Imagen> imagenes;
   std::vector<int> votos;
 };

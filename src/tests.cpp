@@ -213,3 +213,65 @@ void testGaleria() {
     assert(vim[i].obtenerPixel(0,0).red() == res_t10_12[i]);
   }
 }
+
+  //agrega imagen cuaquiera de 2x2 que no está
+
+  string galeriaInStringa  = "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),(1 1 [(2;2;2)],2)]";
+  string galeriaOutStringa = "[(2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)],0),(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  istringstream issa(galeriaInStringa.c_str());
+  ostringstream ossa;
+
+
+  GaleriaImagenes ga;
+  ga.cargar(issa);
+  
+  istringstream ihss("2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)]");
+
+  Imagen nueva(0,0);
+  nueva.cargar(ihss);
+
+  ga.agregarImagen(nueva);
+  ga.guardar(ossa);
+  assert (ossa.str() == galeriaOutStringa);
+
+  //mantiene la galeria porque la imagen y existia
+
+  string galeriaInStringb  = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  string galeriaOutStringb = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  istringstream issb(galeriaInStringb.c_str());
+  ostringstream ossb;
+
+
+  GaleriaImagenes gb;
+  gb.cargar(issb);
+  
+  istringstream inss("1 1 [(2;2;2)]");
+
+  Imagen usada(0,0);
+  usada.cargar(inss);
+
+  gb.agregarImagen(usada);
+  gb.guardar(ossb);
+  assert (ossb.str() == galeriaOutStringb);
+
+  //galeria vacia
+
+  string galeriaInStringc  = "";
+  string galeriaOutStringc = "[(1 1 [(2;2;2)],0)]";
+  istringstream issc(galeriaInStringc.c_str());
+  ostringstream ossc;
+
+
+  GaleriaImagenes gc;
+  gc.cargar(issc);
+  
+  istringstream ijss("1 1 [(2;2;2)]");
+
+  Imagen rara(0,0);
+  rara.cargar(ijss);
+
+  gc.agregarImagen(rara);
+  gc.guardar(ossc);
+  assert (ossc.str() == galeriaOutStringc);
+
+} 

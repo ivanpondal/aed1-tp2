@@ -10,8 +10,23 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
 //TODO
 }
 
+bool GaleriaImagenes::existeImagen(const Imagen &imagen) {
+  int i;
+  bool res=false;
+  for(i=0; i<this->imagenes.size() ; i++){
+    if(imagen == this->imagenes[i]){
+      res=true;
+    }
+  }
+  return res;
+}
 void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
-//TODO
+
+  if(!this->existeImagen(imagen)){
+    this->imagenes.push_back(imagen);
+    this->votos.push_back(0);
+    this->acomodar();
+  }
 }
 
 void GaleriaImagenes::votar(const Imagen &imagen) {
