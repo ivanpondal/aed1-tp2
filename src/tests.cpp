@@ -102,9 +102,6 @@ void testImagen() {
   ifstream archivoBlurK5("../res/hermione.blur.k5.specimg");
   ifstream archivoAcuarelaK5("../res/hermione.acuarela.k5.specimg");
 
-  ofstream archivoBlurNuestroK5("../res/hermione.blurnuestro.k5.specimg");
-  ofstream archivoAcuarelaNuestroK5("../res/hermione.acuarelanuestro.k5.specimg");
-
   Imagen imagenOriginal(0,0);
   Imagen imagenOriginal2(0,0);
 
@@ -117,21 +114,11 @@ void testImagen() {
   imagenOriginal.blur(5);
   imagenOriginal2.acuarela(5);
 
-  imagenOriginal.guardar(archivoBlurNuestroK5);
-  imagenOriginal2.guardar(archivoAcuarelaNuestroK5);
-
-  archivoBlurNuestroK5.close();
-  archivoAcuarelaNuestroK5.close();
-
   imagenBlurK5.cargar(archivoBlurK5);
   imagenAcuarelaK5.cargar(archivoAcuarelaK5);
 
-  //FIXME: las imagenes no cumplen el filtro blur, hay sombras raras en los bordes.
-  //       ademas, son k6, no k5
-  //
-  //FIXME: hacer que esto corra o pedirle a los profes imagenes que cumplan la spec
-  //assert (imagenOriginal == imagenBlurK5);
-  //assert (imagenOriginal2 == imagenAcuarelaK5);
+  assert (imagenOriginal == imagenBlurK5);
+  assert (imagenOriginal2 == imagenAcuarelaK5);
 
   //posicionesMasOscuras
   //ejemplo fruta

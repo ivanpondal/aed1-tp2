@@ -6,7 +6,12 @@ done
 endef
 
 
-all: hermione.specimg jennifer.specimg ACDC.specimg
+all: specimgs
+
+clean:
+	rm -f *.specimg
+
+specimgs: hermione.specimg jennifer.specimg ACDC.specimg
 
 hermione.specimg:
 	$(2spec)

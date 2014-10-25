@@ -1,4 +1,4 @@
-all: clean conv tests reconv main
+all: clean conv tests main
 
 clean:
 	rm -f pixel.o imagen.o galeria_imagenes.o main tests
@@ -21,7 +21,3 @@ galeria_imagenes.o:
 
 conv:
 	cd ../res && make
-
-reconv:
-	cd ../res && python2 ../tools/algo1converter.py hermione.blurnuestro.k5.specimg filtered/hermione.blurnuestro.k5.png 1
-	cd ../res && python2 ../tools/algo1converter.py hermione.acuarelanuestro.k5.specimg filtered/hermione.acuarelanuestro.k5.png 1
