@@ -85,7 +85,8 @@
 \begin{ejercicio}
 	\begin{problema}{laMasChiquitaConPuntoBlanco}{g:Galeria}{result:Imagen}
 		\requiere { |listaImagenesConPixelBlanco(imagenes(g))|>0 }
-		\asegura {result == listaImagenesOrdenadasTama\tilde{n}o(listaImagenesConPixelBlanco(imagenes(g)))[0] }
+		\asegura [tienePuntoBlanco]{result \in listaImagenesConPixelBlanco(imagenes(g))}
+		\asegura [esChiquita]{area(result) == minimo( \newline [area(i) | i \leftarrow listaImagenesConPixelBlanco(imagenes(g))]) }
 	\end{problema}
 \end{ejercicio}
 
@@ -164,6 +165,10 @@
 
 	\item \auxil{listaSumaCanalesPixeles(i: Imagen) : \TLista{\ent}}{ \newline
 	  [ sumaCanalesPixel(color(i, x, y))\ | \ y \leftarrow [0..alto(i)), x \leftarrow [0..ancho(i))]
+	}
+
+	\item \auxil{area(i: Imagen) : \ent}{
+		ancho(i) * alto(i)
 	}
 
 	\item \auxil{menorSumaCanales(i: Imagen) : \ent}{
