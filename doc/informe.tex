@@ -179,10 +179,6 @@
 	  [votos(g, i) | i \leftarrow imagenes(g)]
 	}
 
-	\item \auxil{cantPixeles(i: Imagen) : \ent}{
-	  ancho(i)*alto(i)
-	}
-
 	\item \auxil{esPixelBlanco(px: Pixel) : Bool}{
 	  red(px) == green(px) == blue(px) == 255
 	}
@@ -193,10 +189,6 @@
 
 	\item \auxil{listaImagenesConPixelBlanco(imgs: [Imagen]) : [Imagen]}{
 	  [im \ | \ im \leftarrow imgs, tienePixelBlanco(im)]
-	}
-
-	\item \auxil{cuentaMenosPixeles(imgs: [Imagen], img: Imagen) : \ent}{ \newline
-	  |[1 \ | \ im \leftarrow imgs, cantPixeles(im)<cantPixeles(img)]|
 	}
 
 	\item \auxil{cuentaMasVotos(g: Galeria, imgs: [Imagen], img: Imagen) : \ent}{ \newline
