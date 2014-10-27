@@ -1,7 +1,6 @@
 #include "imagen.h"
 #include "galeria_imagenes.h"
 #include <vector>
-#include <iostream>
 
 void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
 //TODO
