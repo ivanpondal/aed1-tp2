@@ -123,8 +123,8 @@
 		\requiere[noVacia]{|imagenes(pre(g))| > 0}
 		\modifica{g}
 		\asegura[seVaUnaSola]{|imagenes(g)| == |imagenes(pre(g))| - 1 }
-		\asegura[siSeVaEsGrosa]{ (\forall i \leftarrow imagenes(pre(g)),\ i \notin imagenes(g)) \newline
-			votos(g, i) == maximo(todosLosVotos(g)) }
+		\asegura[laQueSeFueEraGrosa]{ (\forall i \leftarrow imagenes(pre(g)),\ i \notin imagenes(g)) \newline
+			votos(pre(g), i) == maximo(todosLosVotos(pre(g))) }
 		\asegura[lasQueEstanVienenDeAntesConSusVotos] {
 			(\forall i \leftarrow imagenes(g)) \newline
 			i \in imagenes(pre(g)) \land
