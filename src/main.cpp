@@ -8,12 +8,16 @@
 using namespace std;
 
 void doFilter(int filter);
-void doPosicionesMasOscuras();
-void doAgregarImagen();
+void doPosicionesMasOscuras(GaleriaImagenes &galeria);
+void doAgregarImagen(GaleriaImagenes &galeria);
+void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
+void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 
 int main()
 {
 	int selected_action =- 1;
+	GaleriaImagenes galeria;
+	string rutaArchivoGaleria;
 
 	while(selected_action != 0){
 		cout << "ingrese el número de la acción que desea realizar:" << endl;
@@ -40,13 +44,13 @@ int main()
 				doFilter(ACUARELA);
 				break;
 			case 3:
-				// TODO cargar galería
+				doCargarGaleria(galeria, rutaArchivoGaleria);
 				break;
 			case 4:
 				// TODO dividirYAgregar
 				break;
 			case 5:
-				doPosicionesMasOscuras();
+				doPosicionesMasOscuras(galeria);
 				break;
 			case 6:
 				// TODO top 10
@@ -55,7 +59,7 @@ int main()
 				// TODO laMásChiquitaConPuntoBlanco
 				break;
 			case 8:
-				doAgregarImagen();
+				doAgregarImagen(galeria);
 				break;
 			case 9:
 				// TODO votar
@@ -64,7 +68,7 @@ int main()
 				// TODO eliminarMásVotada
 				break;
 			case 11:
-				// TODO guardar galería
+				doGuardarGaleria(galeria, rutaArchivoGaleria);
 				break;
 		}
 	}
@@ -102,7 +106,7 @@ void doFilter(int filter){
 	imagenOriginal.guardar(archivoOut);
 }
 
-void doPosicionesMasOscuras(){
+void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 	string nombreArchivoIn;
 	ifstream archivoIn;
 	Imagen imagenOriginal (0,0);
@@ -134,11 +138,9 @@ void doPosicionesMasOscuras(){
 
 	galeria.agregarImagen(imagenOriginal);
 
-	//FIXME faltaría agregar la galeria al main.
-
 }
 
-void doAgregarImagen(){
+void doAgregarImagen(GaleriaImagenes &galeria){
 	string nombreArchivoIn;
 	ifstream archivoIn;
 	Imagen imagenNueva (0,0);
@@ -153,5 +155,27 @@ void doAgregarImagen(){
 
 	galeria.agregarImagen(imagenNueva);
 
-	//FIXME faltaría agregar la galeria al main.
+}
+
+void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
+	string nombreArchivoIn;
+	ifstream archivoIn;
+
+	cout << "ingrese el nombre de la galeria que desea cargar:" << endl;
+
+	cin >> rutaArchivoGaleria;
+
+	archivoIn.open(nombreArchivoIn.c_str());
+
+	galeria.cargar(archivoIn);
+
+}
+
+void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
+
+	ofstream archivoOut;
+	
+	archivoOut.open(rutaArchivoGaleria.c_str());
+	
+	galeria.guardar(archivoOut);
 }
