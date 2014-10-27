@@ -7,47 +7,47 @@ void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
 }
 
 Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
-  int x=0; int y=0; int minArea=0; 
-  int area=0; int masChiquitaPos=-1;
-  bool tieneBlanco=false;
-  Pixel pixelBlanco(255,255,255);
-  Imagen laMasChiquitaConPuntoBlanco(0,0);
+  int x; int y;
+  int an; int al;
+  int area;
+  bool imgTieneBlanco = false;
 
-  for(int i=0; i< this->imagenes.size(); i++){
-    // recorro todas las imágenes buscando si tienen al menos un punto blanco
-    while(y < this->imagenes[i].alto() && tieneBlanco == false){
-      while(x < this->imagenes[i].ancho() && tieneBlanco == false){
+  int minArea = -1;
+  Pixel pixelBlanco (255, 255, 255);
+  Imagen laMasChiquitaConPuntoBlanco (0, 0);
+
+  // recorro todas las imágenes buscando si tienen al menos un punto blanco
+  for(int i=0; i < this->imagenes.size(); i++) {
+    img = this->imagenes[i];
+    imgTieneBlanco = false;
+
+    an = img.ancho();
+    al = img.alto();
+    area = an * al;
+
+    y = 0;
+    while(y < al && !imgTieneBlanco) {
+      x=0;
+      while(x < an && !imgTieneBlanco) {
+
         // en el caso de que tengan punto blanco me fijo si es más chica la imagen que la anterior que tuviese
-        if(imagenes[i].obtenerPixel(y, x) == pixelBlanco)
-        {
-          area = imagenes[i].ancho()*imagenes[i].alto();
-          if(masChiquitaPos == -1)
-          {
-            minArea = area;
-            masChiquitaPos = i;
-          }
-          else
-          {
-            if(minArea > area)
-            {
+        if(img.obtenerPixel(y, x) == pixelBlanco) {
+          imgTieneBlanco = true;
+          // si todavia no habia guardado ninguna con punto blanco o el area que tengo es mas grande que esta, la guardo
+          if ((minArea == -1) || (minArea > area)) {
               minArea = area;
-              masChiquitaPos = i;
-            }
+              laMasChiquitaConPuntoBlanco = img;
           }
-          tieneBlanco=true;
         }
+
         x++;
       }
-      x=0;
+
       y++;
     }
-    x=0;
-    y=0;
-    tieneBlanco=false;
+
   }
 
-  if(masChiquitaPos != -1) laMasChiquitaConPuntoBlanco = this->imagenes[masChiquitaPos];
-  
   return laMasChiquitaConPuntoBlanco;
 }
 
