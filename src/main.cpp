@@ -13,6 +13,7 @@ void doAgregarImagen(GaleriaImagenes &galeria);
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
+void doEliminarMasVotada(GaleriaImagenes &galeria);
 
 int main()
 {
@@ -66,7 +67,7 @@ int main()
 				// TODO votar
 				break;
 			case 10:
-				// TODO eliminarMásVotada
+				doEliminarMasVotada(galeria);
 				break;
 			case 11:
 				doGuardarGaleria(galeria, rutaArchivoGaleria);
@@ -214,6 +215,11 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 		cout << "no se encontró ninguna imagen con punto blanco" << endl;
 	}
 
+	cin.ignore();
+}
+
+void doEliminarMasVotada(GaleriaImagenes &galeria){
+	galeria.eliminarMasVotada();
 	cin.ignore();
 }
 
