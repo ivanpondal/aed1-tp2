@@ -12,6 +12,7 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria);
 void doAgregarImagen(GaleriaImagenes &galeria);
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
+void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
 
 int main()
 {
@@ -56,7 +57,7 @@ int main()
 				// TODO top 10
 				break;
 			case 7:
-				// TODO laMásChiquitaConPuntoBlanco
+				doLaMasChiquitaConPuntoBlanco(galeria);
 				break;
 			case 8:
 				doAgregarImagen(galeria);
@@ -161,7 +162,7 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	string nombreArchivoIn;
 	ifstream archivoIn;
 
-	cout << "ingrese el nombre de la galeria que desea cargar:" << endl;
+	cout << "ingrese el nombre de la galería que desea cargar:" << endl;
 
 	cin >> rutaArchivoGaleria;
 
@@ -179,3 +180,23 @@ void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	
 	galeria.guardar(archivoOut);
 }
+
+
+void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
+	string nombreArchivoOut;
+	ofstream archivoOut;
+	Imagen imagenFinal(0,0);
+
+	imagenFinal = galeria.laMasChiquitaConPuntoBlanco();
+
+	if(imagenFinal.ancho() != 0 && imagenFinal.alto() != 0){
+		cout << "ingrese el nombre para la imagen más chiquita con punto blanco:" << endl;
+
+		cin >> nombreArchivoOut;
+
+		archivoOut.open(nombreArchivoOut.c_str());
+
+		imagenFinal.guardar(archivoOut);
+	}
+}
+
