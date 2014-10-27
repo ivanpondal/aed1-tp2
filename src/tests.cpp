@@ -271,4 +271,36 @@ void testGaleria() {
   gc.guardar(ossc);
   assert (ossc.str() == galeriaOutStringc);
 
+  // la más chiquita con punto blanco
+
+  // una imagen con punto blanco
+  Imagen laMasChiquita(0,0);
+  galeriaInString = "[(1 1 [(0;0;0)],0),(1 1 [(255;255;255)],0)]";
+  galeriaOutString = "1 1 [(255;255;255)]";
+  iss.clear();
+  iss.str(galeriaInString.c_str());
+
+  g.cargar(iss);
+
+  laMasChiquita = g.laMasChiquitaConPuntoBlanco();
+
+  oss.str("");
+  oss.clear();
+  laMasChiquita.guardar(oss);
+  assert (oss.str() == galeriaOutString);
+
+  // dos imagenes con punto blanco
+  galeriaInString = "[(1 2 [(255;255;255),(0;0;0)],0),(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0)]";
+  galeriaOutString = "1 2 [(255;255;255),(0;0;0)]";
+  iss.clear();
+  iss.str(galeriaInString.c_str());
+
+  g.cargar(iss);
+
+  laMasChiquita = g.laMasChiquitaConPuntoBlanco();
+
+  oss.str("");
+  oss.clear();
+  laMasChiquita.guardar(oss);
+  assert (oss.str() == galeriaOutString);
 }

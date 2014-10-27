@@ -1,6 +1,7 @@
 #include "imagen.h"
 #include "galeria_imagenes.h"
 #include <vector>
+#include <iostream>
 
 void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
 //TODO
@@ -46,8 +47,8 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
     tieneBlanco=false;
   }
 
-  if(masChiquitaPos != -1) laMasChiquitaConPuntoBlanco == this->imagenes[masChiquitaPos];
-
+  if(masChiquitaPos != -1) laMasChiquitaConPuntoBlanco = this->imagenes[masChiquitaPos];
+  
   return laMasChiquitaConPuntoBlanco;
 }
 
