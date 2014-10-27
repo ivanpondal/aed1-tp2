@@ -15,6 +15,7 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
   int minArea = -1;
   Pixel pixelBlanco (255, 255, 255);
   Imagen laMasChiquitaConPuntoBlanco (0, 0);
+  Imagen img (0, 0);
 
   // recorro todas las imágenes buscando si tienen al menos un punto blanco
   for(int i=0; i < this->imagenes.size(); i++) {
