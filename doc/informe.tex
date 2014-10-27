@@ -73,11 +73,11 @@
 
 \begin{ejercicio}
 	\begin{problema}{top10}{g: Galeria}{result : [Imagen]}
-		\asegura{
-			(|imagenes(g)|<10) \rightarrow \newline result == listaImagenesOrdenadasVotos(g, imagenes(g))
-		}
-		\asegura{
-			(|imagenes(g)| \geq 10) \rightarrow \newline result == listaImagenesOrdenadasVotos(g, imagenes(g))[0$..$10)
+		\asegura[topDiezOMenos]{|result|==min(|imagenes(g)|,10)}
+		\asegura[estanEnGaleria]{(\forall im \leftarrow result)im \in imagenes(g)}
+		\asegura[sinRepetidos]{(\forall i, j \leftarrow [0..|result|), i \neq j) result[i] \neq result[j]}
+		\asegura[ordenPorVotos]{
+			(\forall i \leftarrow [0..|result|)) \newline votos(g,result[i])==listaVotosOrdenados(g, imagenes(g))[i]
 		}
 	\end{problema}
 \end{ejercicio}
@@ -195,8 +195,8 @@
 	  |[1 \ | \ im \leftarrow imgs, votos(g,im)>votos(g,img)]|
 	}
 
-	\item \auxil{listaImagenesOrdenadasVotos(g: Galeria, imgs: [Imagen]) : [Imagen]}{ \newline
-	  [im \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMasVotos(g,imgs,im)==i]
+	\item \auxil{listaVotosOrdenados(g: Galeria, imgs: [Imagen]) : [\ent]}{ \newline
+	  [votos(g,im) \ | \ i \leftarrow [0..|imgs|),im \leftarrow imgs, cuentaMasVotos(g,imgs,im)==i]
 	}
 
 \end{itemize}
