@@ -121,7 +121,6 @@ void GaleriaImagenes::guardar (std::ostream& os) const {
 
 void GaleriaImagenes::cargar (std::istream& is) {
 
-  int kx, ky, kt;
   Imagen img(0, 0);
   int vts;
   char c;
