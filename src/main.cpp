@@ -9,6 +9,7 @@ using namespace std;
 
 void doFilter(int filter);
 void doPosicionesMasOscuras();
+void doAgregarImagen();
 
 int main()
 {
@@ -54,7 +55,7 @@ int main()
 				// TODO laMásChiquitaConPuntoBlanco
 				break;
 			case 8:
-				// TODO agregarImagen
+				doAgregarImagen();
 				break;
 			case 9:
 				// TODO votar
@@ -131,5 +132,26 @@ void doPosicionesMasOscuras(){
 
 	cout << "]";
 
-	//TODO falta agregar galeria
+	galeria.agregarImagen(imagenOriginal);
+
+	//FIXME faltaría agregar la galeria al main.
+
+}
+
+void doAgregarImagen(){
+	string nombreArchivoIn;
+	ifstream archivoIn;
+	Imagen imagenNueva (0,0);
+
+	cout << "ingrese el nombre de la imagen que desea agregar:" << endl;
+
+	cin >> nombreArchivoIn;
+
+	archivoIn.open(nombreArchivoIn.c_str());
+
+	imagenNueva.cargar(archivoIn);
+
+	galeria.agregarImagen(imagenNueva);
+
+	//FIXME faltaría agregar la galeria al main.
 }

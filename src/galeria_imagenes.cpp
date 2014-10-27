@@ -11,15 +11,17 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
 }
 
 bool GaleriaImagenes::existeImagen(const Imagen &imagen) {
-  int i;
+  int i=0;
   bool res=false;
-  for(i=0; i<this->imagenes.size() ; i++){
+  while(i<this->imagenes.size() && res==false){
     if(imagen == this->imagenes[i]){
       res=true;
     }
+    i++;
   }
   return res;
 }
+
 void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
 
   if(!this->existeImagen(imagen)){
