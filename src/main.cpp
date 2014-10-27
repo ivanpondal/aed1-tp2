@@ -71,6 +71,14 @@ int main()
 			case 11:
 				doGuardarGaleria(galeria, rutaArchivoGaleria);
 				break;
+			default:
+				cin.ignore();
+				break;
+		}
+
+		if(selected_action != 0){
+			cout << "presione una tecla para continuar..." << endl;
+			cin.ignore();
 		}
 	}
 }
@@ -89,6 +97,7 @@ void doFilter(int filter){
 	cin >> nombreArchivoOut;
 	cout << "ingrese la intensidad del filtro (k):" << endl;
 	cin >> k;
+	cin.ignore();
 	
 	archivoIn.open(nombreArchivoIn.c_str());
 	
@@ -115,6 +124,7 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 	cout << "ingrese el nombre del archivo a leer:" << endl;
 
 	cin >> nombreArchivoIn;
+	cin.ignore();
 
 	archivoIn.open(nombreArchivoIn.c_str());
 
@@ -135,7 +145,7 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 		}
 	}
 
-	cout << "]";
+	cout << "]" << endl;
 
 	galeria.agregarImagen(imagenOriginal);
 
@@ -149,6 +159,7 @@ void doAgregarImagen(GaleriaImagenes &galeria){
 	cout << "ingrese el nombre de la imagen que desea agregar:" << endl;
 
 	cin >> nombreArchivoIn;
+	cin.ignore();
 
 	archivoIn.open(nombreArchivoIn.c_str());
 
@@ -163,7 +174,8 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 
 	cout << "ingrese el nombre de la galería que desea cargar:" << endl;
 
-	cin >> rutaArchivoGaleria;
+	cin >> rutaArchivoGaleria ;
+	cin.ignore();
 
 	archivoIn.open(rutaArchivoGaleria.c_str());
 
@@ -177,6 +189,8 @@ void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	archivoOut.open(rutaArchivoGaleria.c_str());
 	
 	galeria.guardar(archivoOut);
+
+	cin.ignore();
 }
 
 
@@ -187,7 +201,7 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 
 	imagenFinal = galeria.laMasChiquitaConPuntoBlanco();
 
-	if(imagenFinal.ancho() != 0 && imagenFinal.alto() != 0){
+	if(imagenFinal.alto() != 0){
 		cout << "ingrese el nombre para la imagen más chiquita con punto blanco:" << endl;
 
 		cin >> nombreArchivoOut;
@@ -196,5 +210,10 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 
 		imagenFinal.guardar(archivoOut);
 	}
+	else{
+		cout << "no se encontró ninguna imagen con punto blanco" << endl;
+	}
+
+	cin.ignore();
 }
 
