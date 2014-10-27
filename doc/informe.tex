@@ -93,25 +93,25 @@
 
 	\begin{problema*}{agregarImagen}{g:Galeria, i: Imagen}
 		\modifica{g}
-		\asegura {
-			(\forall j \leftarrow imagenes(pre(g)))\
+		\asegura[lasDeAntesEstanConSusVotos] {
+			(\forall j \leftarrow imagenes(pre(g))) \newline
 			j \in imagenes(g) \land votos(g, j) == votos(pre(g), j) }
-		\asegura {
-			(\forall j \leftarrow imagenes(g), j \neq i)\
+		\asegura[lasQueEstanSalvoLaQueAgregoVienenDeAntes] {
+			(\forall j \leftarrow imagenes(g), j \neq i) \newline
 			j \in imagenes(pre(g))
 		}
-		\asegura { i \notin imagenes(pre(g)) \rightarrow ( i \in imagenes(g) \land votos(g, i) == 0) }
+		\asegura [siAgregoNuevaEntraConCeroVotos]{ i \notin imagenes(pre(g)) \rightarrow \newline ( i \in imagenes(g) \land votos(g, i) == 0) }
 	\end{problema*}
 
 \end{ejercicio}
 
 \begin{ejercicio}
       \begin{problema*}{votar}{g: Galeria, i: Imagen}
-		\requiere{i \in imagenes(g)}
+		\requiere[noSeVotaCualquierCosa]{i \in imagenes(pre(g)}
 		\modifica{g}
-		\asegura{ mismos(imagenes(g), imagenes(pre(g))) }
-		\asegura{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(g, m) == votos(pre(g), m)}
-		\asegura{ votos(g,i) == votos(pre(g), i) + 1 }
+		\asegura[noCambianLasImagenes]{ mismos(imagenes(g), imagenes(pre(g))) }
+		\asegura[noSeTocanLosVotosDeLosOtros]{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(g, m) == votos(pre(g), m)}
+		\asegura[elQueSeVotaSumaUno]{ votos(g,i) == votos(pre(g), i) + 1 }
       \end{problema*}
 
 \end{ejercicio}
@@ -124,7 +124,12 @@
 		\asegura[seVaUnaSola]{|imagenes(g)| == |imagenes(pre(g))| - 1 }
 		\asegura[siSeVaEsGrosa]{ (\forall i \leftarrow imagenes(pre(g)),\ i \notin imagenes(g)) \newline
 			votos(g, i) == maximo(todosLosVotos(g)) }
-		\asegura[noSeTocanLosVotos]{ (\forall i \leftarrow imagenes(g))\ votos(g, i) == votos(pre(g), i) }
+		\asegura[lasQueEstanVienenDeAntesConSusVotos] {
+			(\forall i \leftarrow imagenes(g)) \newline
+			i \in imagenes(pre(g)) \land
+			votos(g, i) == votos(pre(g), i)
+		}
+
 	\end{problema*}
 
 
