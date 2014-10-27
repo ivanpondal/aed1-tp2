@@ -159,17 +159,15 @@ void doAgregarImagen(GaleriaImagenes &galeria){
 }
 
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
-	string nombreArchivoIn;
 	ifstream archivoIn;
 
 	cout << "ingrese el nombre de la galería que desea cargar:" << endl;
 
 	cin >> rutaArchivoGaleria;
 
-	archivoIn.open(nombreArchivoIn.c_str());
+	archivoIn.open(rutaArchivoGaleria.c_str());
 
 	galeria.cargar(archivoIn);
-
 }
 
 void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
