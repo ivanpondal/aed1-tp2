@@ -303,4 +303,14 @@ void testGaleria() {
   oss.clear();
   laMasChiquita.guardar(oss);
   assert (oss.str() == galeriaOutString);
+
+
+
+  //votar imagen
+  g.votar(laMasChiquita);
+  oss.str("");
+  oss.clear();
+  g.guardar(oss);
+  assert (oss.str() == "[(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0),(1 2 [(255;255;255),(0;0;0)],1)]");
+
 }

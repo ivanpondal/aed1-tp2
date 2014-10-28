@@ -74,7 +74,16 @@ void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
 }
 
 void GaleriaImagenes::votar(const Imagen &imagen) {
-//TODO
+  int raul;
+  int k=0;
+  while(k<imagenes.size()){
+    if(imagenes[k]==imagen){
+      raul=k;
+    }
+    k++;
+  }
+  this->votos[raul]++;
+  this->acomodar();
 }
 
 void GaleriaImagenes::eliminarMasVotada() {

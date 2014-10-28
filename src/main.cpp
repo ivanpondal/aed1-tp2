@@ -14,6 +14,7 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
 void doEliminarMasVotada(GaleriaImagenes &galeria);
+void doVotar(GaleriaImagenes &galeria);
 
 int main()
 {
@@ -64,7 +65,7 @@ int main()
 				doAgregarImagen(galeria);
 				break;
 			case 9:
-				// TODO votar
+				doVotar(galeria);
 				break;
 			case 10:
 				doEliminarMasVotada(galeria);
@@ -223,3 +224,21 @@ void doEliminarMasVotada(GaleriaImagenes &galeria){
 	cin.ignore();
 }
 
+void doVotar(GaleriaImagenes &galeria){
+	string nombreArchivoIn;
+	ifstream archivoIn;
+	Imagen imagenVotada (0,0);
+
+	cout << "ingrese el nombre de la imagen que desea votar:" << endl;
+	
+	cin >> nombreArchivoIn;
+
+	archivoIn.open(nombreArchivoIn.c_str());
+
+	imagenVotada.cargar(archivoIn);
+
+	galeria.votar(imagenVotada);
+
+	cin.ignore();
+
+}
