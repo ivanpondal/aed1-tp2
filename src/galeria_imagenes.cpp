@@ -74,15 +74,15 @@ void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
 }
 
 void GaleriaImagenes::votar(const Imagen &imagen) {
-  int raul;
+  int posImg;
   int k=0;
   while(k<imagenes.size()){
     if(imagenes[k]==imagen){
-      raul=k;
+      posImg=k;
     }
     k++;
   }
-  this->votos[raul]++;
+  this->votos[posImg]++;
   this->acomodar();
 }
 
