@@ -13,6 +13,7 @@
 \usepackage{xspace}
 \usepackage{longtable}
 \usepackage{caratula}
+\usepackage{xcolor}
 % incluye macros espec materia
 \include{algo1-cmds}
 
@@ -201,7 +202,37 @@
 
 \end{itemize}
 
-\section{abs e invRep de Galería}
+\section{Demostraciones}
 
+\subsection{Predicado de abstracción e invariante de representación}
+
+\begin{lstlisting}
+class GaleriaImagenes {
+ public:
+  void dividirYAgregar(const Imagen &imagen, int n, int m);
+  Imagen laMasChiquitaConPuntoBlanco() const;
+  void agregarImagen(const Imagen &imagen);
+  void votar(const Imagen &imagen);
+  void eliminarMasVotada();
+  vector <Imagen> top10() const;
+
+  void guardar(std::ostream& os) const;
+  void cargar (std::istream& is);
+
+ private:
+  void acomodar();
+  bool existeImagen(const Imagen &imagen);
+  std::vector<Imagen> imagenes;
+  std::vector<int> votos;
+
+  // InvRep(imp : GaleriaImagenes):
+  // |imp.imagenes| == |imp.votos| $\land$
+  // $(\forall v \leftarrow imp.votos) \ v \geq 0 $
+
+  // abs(imp : GaleriaImagenes, esp : Galeria):
+  // mismos(imp.imagenes, imagenes(esp)) $\land$
+  // $(\forall i \leftarrow [0..|imp.votos|)) \ imp.votos[i] == votos(esp, imp.imagenes[i]) $
+};
+\end{lstlisting}
 
 \end{document}
