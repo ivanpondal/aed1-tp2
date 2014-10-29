@@ -215,7 +215,6 @@ class GaleriaImagenes {
   void votar(const Imagen &imagen);
   void eliminarMasVotada();
   vector <Imagen> top10() const;
-
   void guardar(std::ostream& os) const;
   void cargar (std::istream& is);
 
@@ -226,12 +225,13 @@ class GaleriaImagenes {
   std::vector<int> votos;
 
   // InvRep(imp : GaleriaImagenes):
-  // |imp.imagenes| == |imp.votos| $\land$
-  // $(\forall v \leftarrow imp.votos) \ v \geq 0 $
+  // $|imp.imagenes| == |imp.votos| \ \land$
+  // $(\forall v \leftarrow imp.votos) \ v \geq 0$
+  // $(\forall i,j \leftarrow [0..|imp.imagenes|),i < j) \ imp.imagenes[i] \neq imp.imagenes[j] \ \land \ imp.votos[i] \leq imp.votos[j] $
 
   // abs(imp : GaleriaImagenes, esp : Galeria):
-  // mismos(imp.imagenes, imagenes(esp)) $\land$
-  // $(\forall i \leftarrow [0..|imp.votos|)) \ imp.votos[i] == votos(esp, imp.imagenes[i]) $
+  // $mismos(imp.imagenes, imagenes(esp)) | \ \land$
+  // $(\forall i \leftarrow [0..|imp.votos|)) \ imp.votos[i] == votos(esp, imp.imagenes[i])$
 };
 \end{lstlisting}
 
