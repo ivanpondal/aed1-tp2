@@ -1,5 +1,8 @@
 #include "pixel.h"
 
+//TODO ordenar esto como estaba el .h original
+//TODO unificar el uso de this-> (ponerlo siempre)
+
 Pixel::Pixel(int red, int green, int blue) {
   this->cambiarPixel(red, green, blue);
 }

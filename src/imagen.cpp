@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <vector>
 
+//TODO ordenar esto como estaba el .h original
+//TODO unificar el uso de this-> (ponerlo siempre)
 Imagen::Imagen(int alto_param, int ancho_param) {
 
     for (int y=0; y<alto_param; y++) {
@@ -106,7 +108,7 @@ void Imagen::aplicarFiltro(int filtro, int k) {
 	Pixel2DContainer pixelsFiltro;
 	int x=0; int y=0;
 	Pixel pixel(0,0,0);
-	
+
 	while (y < this->alto()){
 		Pixel1DContainer fila;
 		while(x < this->ancho()){
@@ -138,7 +140,7 @@ Pixel Imagen::pixelPromedioKVecinos(int k, int x, int y) const {
 	int totalKVecinos=(2*k-1)*(2*k-1);
 	int xi=x-k+1;
 	int yi=y-k+1;
-		
+
 	Pixel pixelPromedio;
 
 	while(yi < y+k){
@@ -153,13 +155,13 @@ Pixel Imagen::pixelPromedioKVecinos(int k, int x, int y) const {
 		xi=x-k+1;
 		yi++;
 	}
-	
+
 	r /= totalKVecinos;
 	g /= totalKVecinos;
 	b /= totalKVecinos;
-	
+
 	pixelPromedio.cambiarPixel(r,g,b);
-	
+
 	return pixelPromedio;
 }
 
@@ -182,7 +184,7 @@ Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
       red[i] = p.red();
       green[i] = p.green();
       blue[i] = p.blue();
-      
+
       i++;
       xi++;
     }
@@ -209,7 +211,7 @@ void Imagen::acuarela(int k){
 bool Imagen::operator==(const Imagen &otra) const{
 	bool equals=true;
 	if(this->ancho() == otra.ancho() && this->alto()== otra.alto()){
-		int x=0; int y=0;	
+		int x=0; int y=0;
 		while (y < this->alto() && equals){
 			while(x < this->ancho() && equals){
 				if(this->pixels[y][x] != otra.obtenerPixel(y,x)){
