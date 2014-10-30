@@ -18,6 +18,7 @@ void doVotar(GaleriaImagenes &galeria);
 void doTop10(GaleriaImagenes &galeria);
 
 void abrirArchivoIn(string mensaje, ifstream &archivoIn);
+void abrirArchivoInYpisarElNombre(string mensaje, ifstream &archivoIn, string& elNombre);
 void abrirArchivoOut(string mensaje, ofstream &archivoOut);
 
 
@@ -154,7 +155,10 @@ void doAgregarImagen(GaleriaImagenes &galeria){
 }
 
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
-	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la galeria que desea cargar:", archivoIn);
+	ifstream archivoIn;
+
+  abrirArchivoInYpisarElNombre("ingrese el nombre de la galeria que desea cargar:",
+															archivoIn, rutaArchivoGaleria);
 
 	galeria.cargar(archivoIn);
 }
@@ -229,6 +233,11 @@ string pedirString(string mensaje) {
 
 void abrirArchivoIn(string mensaje, ifstream& archivoIn) {
 	archivoIn.open(pedirString(mensaje).c_str());
+}
+
+void abrirArchivoInYpisarElNombre(string mensaje, ifstream& archivoIn, string& elNombre) {
+	elNombre = pedirString(mensaje);
+	archivoIn.open(elNombre.c_str());
 }
 
 void abrirArchivoOut(string mensaje, ofstream& archivoOut) {
