@@ -115,6 +115,19 @@ void doFilter(int filter){
 	imagenOriginal.guardar(archivoOut);
 }
 
+void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
+	ifstream archivoIn;
+
+	abrirArchivoInYpisarElNombre("ingrese el nombre de la galeria que desea cargar:",
+	archivoIn, rutaArchivoGaleria);
+
+	galeria.cargar(archivoIn);
+}
+
+void doDividirYAgregar(GaleriaImagenes &galeria){
+	//TODO
+}
+
 void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 	string nombreArchivoIn;
 	ifstream archivoIn; abrirArchivoIn("ingrese el nombre del archivo a leer:", archivoIn);
@@ -143,32 +156,25 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 
 }
 
-void doAgregarImagen(GaleriaImagenes &galeria){
-	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la imagen que desea agregar:", archivoIn);
-	Imagen imagenNueva (0,0);
+void doTop10(GaleriaImagenes &galeria){
+	vector<Imagen> top10;
+	ofstream archivoOut; abrirArchivoOut("ingrese el nombre del archivo de salida:", archivoOut);
 
-	imagenNueva.cargar(archivoIn);
+	top10 = galeria.top10();
 
-	galeria.agregarImagen(imagenNueva);
+	int i = 0;
 
-}
+	archivoOut << '[';
 
-void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
-	ifstream archivoIn;
+	while(i < top10.size()) {
+			if (i>0 && i < top10.size()) {
+			archivoOut << ',';
+			}
+			top10[i].guardar(archivoOut);
+			i++;
+	}
 
-  abrirArchivoInYpisarElNombre("ingrese el nombre de la galeria que desea cargar:",
-  archivoIn, rutaArchivoGaleria);
-
-	galeria.cargar(archivoIn);
-}
-
-void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
-
-	ofstream archivoOut;
-	//TODO: acá no se pide el nombre del archivo y SIEMPRE se guarda sobre la misma galeria, está bien?
-	archivoOut.open(rutaArchivoGaleria.c_str());
-
-	galeria.guardar(archivoOut);
+	archivoOut << ']';
 }
 
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
@@ -185,9 +191,14 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 	}
 }
 
-void doEliminarMasVotada(GaleriaImagenes &galeria){
-	// FIXME: el requiere dice que aca tiene que haber al menos una imagen y no esta chequeandose eso.
-	galeria.eliminarMasVotada();
+void doAgregarImagen(GaleriaImagenes &galeria){
+	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la imagen que desea agregar:", archivoIn);
+	Imagen imagenNueva (0,0);
+
+	imagenNueva.cargar(archivoIn);
+
+	galeria.agregarImagen(imagenNueva);
+
 }
 
 void doVotar(GaleriaImagenes &galeria){
@@ -200,29 +211,18 @@ void doVotar(GaleriaImagenes &galeria){
 	galeria.votar(imagenVotada);
 }
 
-void doTop10(GaleriaImagenes &galeria){
-	vector<Imagen> top10;
-	ofstream archivoOut; abrirArchivoOut("ingrese el nombre del archivo de salida:", archivoOut);
-
-	top10 = galeria.top10();
-
-	int i = 0;
-
-	archivoOut << '[';
-
-	while(i < top10.size()) {
-	    if (i>0 && i < top10.size()) {
-			archivoOut << ',';
-	    }
-	    top10[i].guardar(archivoOut);
-	    i++;
-	}
-
-	archivoOut << ']';
+void doEliminarMasVotada(GaleriaImagenes &galeria){
+	// FIXME: el requiere dice que aca tiene que haber al menos una imagen y no esta chequeandose eso.
+	galeria.eliminarMasVotada();
 }
 
-void doDividirYAgregar(GaleriaImagenes &galeria){
-	//TODO
+void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
+
+	ofstream archivoOut;
+	//TODO: acá no se pide el nombre del archivo y SIEMPRE se guarda sobre la misma galeria, está bien?
+	archivoOut.open(rutaArchivoGaleria.c_str());
+
+	galeria.guardar(archivoOut);
 }
 
 string pedirString(string mensaje) {
