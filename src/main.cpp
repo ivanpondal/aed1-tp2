@@ -125,7 +125,18 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 }
 
 void doDividirYAgregar(GaleriaImagenes &galeria){
-	//TODO
+	int n, m;
+	Imagen im (0,0);
+	ifstream archivoIn; abrirArchivoIn("Nombre del archivo de la imagen en la galeria a agregar sus divisiones?", archivoIn);
+	im.cargar(archivoIn);
+
+	cout << "Cuantas columnas? (n, debe ser multiplo del ancho de la imagen):\n";
+ 	cin >> n;
+
+	cout << "Cuantas filas? (m, debe ser multiplo del alto de la imagen):\n";
+	cin >> m;
+
+	galeria.dividirYAgregar(im, n, m);
 }
 
 void doPosicionesMasOscuras(GaleriaImagenes &galeria){
