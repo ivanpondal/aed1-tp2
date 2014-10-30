@@ -8,15 +8,15 @@
 using namespace std;
 
 void doFilter(int filter);
+void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doDividirYAgregar(GaleriaImagenes &galeria);
 void doPosicionesMasOscuras(GaleriaImagenes &galeria);
-void doAgregarImagen(GaleriaImagenes &galeria);
-void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
-void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
-void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
-void doEliminarMasVotada(GaleriaImagenes &galeria);
-void doVotar(GaleriaImagenes &galeria);
 void doTop10(GaleriaImagenes &galeria);
+void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
+void doAgregarImagen(GaleriaImagenes &galeria);
+void doVotar(GaleriaImagenes &galeria);
+void doEliminarMasVotada(GaleriaImagenes &galeria);
+void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 
 void abrirArchivoIn(string mensaje, ifstream &archivoIn);
 void abrirArchivoInYpisarElNombre(string mensaje, ifstream &archivoIn, string& elNombre);
