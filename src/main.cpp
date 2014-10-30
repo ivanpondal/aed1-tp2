@@ -158,7 +158,7 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	ifstream archivoIn;
 
   abrirArchivoInYpisarElNombre("ingrese el nombre de la galeria que desea cargar:",
-															archivoIn, rutaArchivoGaleria);
+  archivoIn, rutaArchivoGaleria);
 
 	galeria.cargar(archivoIn);
 }
