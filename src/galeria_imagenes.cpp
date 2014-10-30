@@ -189,6 +189,7 @@ void GaleriaImagenes::cargar (std::istream& is) {
   this->acomodar();
 }
 
+/*
 void GaleriaImagenes::acomodar() {
   Imagen ai(0,0);
   int    av;
@@ -212,3 +213,32 @@ void GaleriaImagenes::acomodar() {
     }
   }
 }
+*/
+void GaleriaImagenes::acomodar() {
+  int i = 0;
+  int j = i;
+  int n = this->imagenes.size();
+  while( i < n ){
+    while ( j>0 && this->imagenes[j] < this->imagenes[j-1] ){
+      swap(this->imagenes, j, j-1);
+      j--;
+    }
+    i++;
+  }
+}
+/*void ordenaUnoMas(int a[], int n, int i){
+  int j = i;
+  while( j>0 && a[j] < a[j-1] ){
+    swap(a, j, j-1);
+    j--;
+  }
+}
+
+void insertion_sort(int a[], int n){
+  int i=0;
+  while( i < n){
+    ordenaUnoMas(a,n,i);
+    i++;
+  }
+}
+*/
