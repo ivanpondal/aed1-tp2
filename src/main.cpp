@@ -8,6 +8,7 @@
 using namespace std;
 
 void doFilter(int filter);
+void doDividirYAgregar(GaleriaImagenes &galeria);
 void doPosicionesMasOscuras(GaleriaImagenes &galeria);
 void doAgregarImagen(GaleriaImagenes &galeria);
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
@@ -48,41 +49,39 @@ int main()
 		cin >> selected_action;
 
 		switch (selected_action){
-			case 1:
-				doFilter(BLUR);
-				break;
-			case 2:
-				doFilter(ACUARELA);
-				break;
-			case 3:
-				doCargarGaleria(galeria, rutaArchivoGaleria);
-				break;
-			case 4:
-				// TODO dividirYAgregar
-				break;
-			case 5:
-				doPosicionesMasOscuras(galeria);
-				break;
-			case 6:
-				doTop10(galeria);
-				break;
-			case 7:
-				doLaMasChiquitaConPuntoBlanco(galeria);
-				break;
-			case 8:
-				doAgregarImagen(galeria);
-				break;
-			case 9:
-				doVotar(galeria);
-				break;
-			case 10:
-				doEliminarMasVotada(galeria);
-				break;
-			case 11:
-				doGuardarGaleria(galeria, rutaArchivoGaleria);
-				break;
-			default:
-				break;
+      case 1:  doFilter(BLUR);
+               break;
+
+      case 2:  doFilter(ACUARELA);
+               break;
+
+      case 3:  doCargarGaleria(galeria, rutaArchivoGaleria);
+               break;
+
+      case 4:  doDividirYAgregar(galeria);
+               break;
+
+      case 5:  doPosicionesMasOscuras(galeria);
+               break;
+
+      case 6:  doTop10(galeria);
+               break;
+
+      case 7:  doLaMasChiquitaConPuntoBlanco(galeria);
+               break;
+
+      case 8:  doAgregarImagen(galeria);
+               break;
+
+      case 9:  doVotar(galeria);
+               break;
+
+      case 10: doEliminarMasVotada(galeria);
+               break;
+
+      case 11: doGuardarGaleria(galeria, rutaArchivoGaleria);
+               break;
+
 		}
 
 		if(selected_action != 0){
@@ -220,6 +219,10 @@ void doTop10(GaleriaImagenes &galeria){
 	}
 
 	archivoOut << ']';
+}
+
+void doDividirYAgregar(GaleriaImagenes &galeria){
+	//TODO
 }
 
 string pedirString(string mensaje) {
