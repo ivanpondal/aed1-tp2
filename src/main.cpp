@@ -17,6 +17,10 @@ void doEliminarMasVotada(GaleriaImagenes &galeria);
 void doVotar(GaleriaImagenes &galeria);
 void doTop10(GaleriaImagenes &galeria);
 
+void abrirArchivoIn(string mensaje, ifstream &archivoIn);
+void abrirArchivoOut(string mensaje, ofstream &archivoOut);
+
+
 int main()
 {
 	int selected_action =- 1;
@@ -87,23 +91,15 @@ int main()
 }
 
 void doFilter(int filter){
-	int k;
-	string nombreArchivoIn;
-	string nombreArchivoOut;
-	ifstream archivoIn;
-	ofstream archivoOut;
 	Imagen imagenOriginal (0,0);
-	
-	cout << "ingrese el nombre del archivo a modificar:" << endl;
-	cin >> nombreArchivoIn;
-	cout << "ingrese el nombre del archivo de salida:" << endl;
-	cin >> nombreArchivoOut;
+	ifstream archivoIn;  abrirArchivoIn("ingrese el nombre del archivo a modificar:", archivoIn);
+	ofstream archivoOut; abrirArchivoOut("ingrese el nombre del archivo de salida:", archivoOut);
+	int k;
+
 	cout << "ingrese la intensidad del filtro (k):" << endl;
 	cin >> k;
 	cin.ignore();
-	
-	archivoIn.open(nombreArchivoIn.c_str());
-	
+
 	imagenOriginal.cargar(archivoIn);
 	switch(filter){
 		case BLUR:
@@ -113,23 +109,14 @@ void doFilter(int filter){
 			imagenOriginal.acuarela(k);
 			break;
 	}
-	
-	archivoOut.open(nombreArchivoOut.c_str());
-	
+
 	imagenOriginal.guardar(archivoOut);
 }
 
 void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 	string nombreArchivoIn;
-	ifstream archivoIn;
+	ifstream archivoIn; abrirArchivoIn("ingrese el nombre del archivo a leer:", archivoIn);
 	Imagen imagenOriginal (0,0);
-
-	cout << "ingrese el nombre del archivo a leer:" << endl;
-
-	cin >> nombreArchivoIn;
-	cin.ignore();
-
-	archivoIn.open(nombreArchivoIn.c_str());
 
 	imagenOriginal.cargar(archivoIn);
 
@@ -155,16 +142,8 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 }
 
 void doAgregarImagen(GaleriaImagenes &galeria){
-	string nombreArchivoIn;
-	ifstream archivoIn;
+	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la imagen que desea agregar:", archivoIn);
 	Imagen imagenNueva (0,0);
-
-	cout << "ingrese el nombre de la imagen que desea agregar:" << endl;
-
-	cin >> nombreArchivoIn;
-	cin.ignore();
-
-	archivoIn.open(nombreArchivoIn.c_str());
 
 	imagenNueva.cargar(archivoIn);
 
@@ -173,14 +152,7 @@ void doAgregarImagen(GaleriaImagenes &galeria){
 }
 
 void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
-	ifstream archivoIn;
-
-	cout << "ingrese el nombre de la galería que desea cargar:" << endl;
-
-	cin >> rutaArchivoGaleria ;
-	cin.ignore();
-
-	archivoIn.open(rutaArchivoGaleria.c_str());
+	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la galeria que desea cargar:", archivoIn);
 
 	galeria.cargar(archivoIn);
 }
@@ -188,27 +160,20 @@ void doCargarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 
 	ofstream archivoOut;
-	
+	//TODO: acá no se pide el nombre del archivo y SIEMPRE se guarda sobre la misma galeria, está bien?
 	archivoOut.open(rutaArchivoGaleria.c_str());
-	
+
 	galeria.guardar(archivoOut);
 
 	cin.ignore();
 }
 
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
-	string nombreArchivoOut;
-	ofstream archivoOut;
-	Imagen imagenFinal(0,0);
-
-	imagenFinal = galeria.laMasChiquitaConPuntoBlanco();
+	Imagen imagenFinal = galeria.laMasChiquitaConPuntoBlanco();
 
 	if(imagenFinal.alto() != 0){
-		cout << "ingrese el nombre para la imagen más chiquita con punto blanco:" << endl;
-
-		cin >> nombreArchivoOut;
-
-		archivoOut.open(nombreArchivoOut.c_str());
+		ofstream archivoOut;
+		abrirArchivoOut("ingrese el nombre para guardar la imagen más chiquita con punto blanco:", archivoOut);
 
 		imagenFinal.guardar(archivoOut);
 	}
@@ -220,20 +185,15 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 }
 
 void doEliminarMasVotada(GaleriaImagenes &galeria){
+	// FIXME: el requiere dice que aca tiene que haber al menos una imagen y no esta chequeandose eso.
 	galeria.eliminarMasVotada();
 	cin.ignore();
 }
 
 void doVotar(GaleriaImagenes &galeria){
-	string nombreArchivoIn;
-	ifstream archivoIn;
 	Imagen imagenVotada (0,0);
 
-	cout << "ingrese el nombre de la imagen que desea votar:" << endl;
-	
-	cin >> nombreArchivoIn;
-
-	archivoIn.open(nombreArchivoIn.c_str());
+	ifstream archivoIn; abrirArchivoIn("ingrese el nombre de la imagen que desea votar:", archivoIn);
 
 	imagenVotada.cargar(archivoIn);
 
@@ -244,20 +204,13 @@ void doVotar(GaleriaImagenes &galeria){
 }
 
 void doTop10(GaleriaImagenes &galeria){
-	string nombreArchivoOut;
-	ofstream archivoOut;	
 	vector<Imagen> top10;
+	ofstream archivoOut; abrirArchivoOut("ingrese el nombre del archivo de salida:", archivoOut);
 
-	cout << "ingrese el nombre del archivo de salida:" << endl;
-	
-	cin >> nombreArchivoOut;
-	
-	archivoOut.open(nombreArchivoOut.c_str());
+	top10 = galeria.top10();
 
-	top10 = galeria.top10();  
-	
 	int i = 0;
-	
+
 	archivoOut << '[';
 
 	while(i < top10.size()) {
@@ -271,4 +224,21 @@ void doTop10(GaleriaImagenes &galeria){
 	archivoOut << ']';
 
 	cin.ignore();
+}
+
+string pedirString(string mensaje) {
+	string str;
+
+	cout << mensaje << '\n';
+	cin  >> str;
+
+	return str;
+}
+
+void abrirArchivoIn(string mensaje, ifstream& archivoIn) {
+	archivoIn.open(pedirString(mensaje).c_str());
+}
+
+void abrirArchivoOut(string mensaje, ofstream& archivoOut) {
+	archivoOut.open(pedirString(mensaje).c_str());
 }
