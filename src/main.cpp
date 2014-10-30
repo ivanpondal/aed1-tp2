@@ -15,6 +15,7 @@ void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria);
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria);
 void doEliminarMasVotada(GaleriaImagenes &galeria);
 void doVotar(GaleriaImagenes &galeria);
+void doTop10(GaleriaImagenes &galeria);
 
 int main()
 {
@@ -56,7 +57,7 @@ int main()
 				doPosicionesMasOscuras(galeria);
 				break;
 			case 6:
-				// TODO top 10
+				doTop10(galeria);
 				break;
 			case 7:
 				doLaMasChiquitaConPuntoBlanco(galeria);
@@ -195,7 +196,6 @@ void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	cin.ignore();
 }
 
-
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 	string nombreArchivoOut;
 	ofstream archivoOut;
@@ -241,4 +241,34 @@ void doVotar(GaleriaImagenes &galeria){
 
 	cin.ignore();
 
+}
+
+void doTop10(GaleriaImagenes &galeria){
+	string nombreArchivoOut;
+	ofstream archivoOut;	
+	vector<Imagen> top10;
+
+	cout << "ingrese el nombre del archivo de salida:" << endl;
+	
+	cin >> nombreArchivoOut;
+	
+	archivoOut.open(nombreArchivoOut.c_str());
+
+	top10 = galeria.top10();  
+	
+	int i = 0;
+	
+	archivoOut << '[';
+
+	while(i < top10.size()) {
+	    if (i>0 && i < top10.size()) {
+			archivoOut << ',';
+	    }
+	    top10[i].guardar(archivoOut);
+	    i++;
+	}
+
+	archivoOut << ']';
+
+	cin.ignore();
 }
