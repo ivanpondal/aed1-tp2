@@ -235,4 +235,28 @@ class GaleriaImagenes {
 };
 \end{lstlisting}
 
+\subsection{Preservación del invariante de representación}
+
+\begin{lstlisting}
+void GaleriaImagenes::eliminarMasVotada() {
+  // Estado E0:
+  // vale $invRep(pre(this)) \ \land \ abs(pre(this), pre(a))$
+  // vale $|imagenes(pre(a))| > 0$ (por requiere)
+  // implica $|pre(this).imagenes| > 0$ (por abs(pre(this), pre(a)))
+  // implica $|pre(this).votos| > 0$
+  
+  // implica $P_{Aux}$: $|pre(this).imagenes|>0$
+  imagenes.pop_back();
+  // Estado E1:
+  // vale $Q_{Aux}$: 
+  // implica $|this.imagenes| == |pre(this).imagenes| - 1 \ \land$
+  // $(\forall i \leftarrow [0..|pre(this).imagenes| - 1)) \ this.imagenes[i] == pre(this).imagenes[i]$
+
+  votos.pop_back();
+}
+
+\end{lstlisting}
+
+\subsection{Demostración de correctitud}
+
 \end{document}
