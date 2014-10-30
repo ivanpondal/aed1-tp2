@@ -1,9 +1,47 @@
 #include "imagen.h"
 #include "galeria_imagenes.h"
 #include <vector>
+//TODO ordenar esto como estaba el .h original
+//TODO unificar el uso de this-> (ponerlo siempre)
 
 void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
-//TODO
+  int d, i, j, x, y, k, an, al;
+  vector<Imagen> divisiones;
+
+  if ( this->existeImagen(imagen)
+    && (n > 0)
+    && (m > 0)
+    && (n % imagen.ancho() == 0)
+    && (m % imagen.alto() == 0)
+  ) {
+
+    k = n*m;
+    an = imagen.ancho() / n;
+    al = imagen.alto() / m;
+
+    for(d=0; d<k; d++) {
+      divisiones.push_back(Imagen(an, al));
+    }
+
+    for(x=0; x<n; x++) {
+      for(y=0; y<m; y++) {
+        d = x*m + y;
+
+        for (j=0; j<an; j++) {
+          for (i=0; i<al; i++) {
+            Pixel p = imagen.obtenerPixel(x*an + j, y*al + i);
+            divisiones[d].modificarPixel(j, i, p);
+          }
+        }
+
+      }
+    }
+
+    for(d=0; d<k; d++) {
+      this->agregarImagen(divisiones[d]);
+    }
+
+  }
 }
 
 Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {

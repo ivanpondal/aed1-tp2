@@ -313,4 +313,21 @@ void testGaleria() {
   g.guardar(oss);
   assert (oss.str() == "[(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0),(1 2 [(255;255;255),(0;0;0)],1)]");
 
+  //dividir y agregar
+  {
+    istringstream giss("[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0)]");
+    istringstream iiss("2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)]");
+    ostringstream oss;
+    GaleriaImagenes g;
+    Imagen im(0,0);
+
+    g.cargar(giss);
+    im.cargar(iiss);
+
+    g.dividirYAgregar(im, 2, 2);
+
+    g.guardar(oss);
+
+    assert (oss.str() == "[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0),(1 1 [(11;11;11)],0),(1 1 [(22;22;22)],0),(1 1 [(33;33;33)],0),(1 1 [(44;44;44)],0)]");
+  }
 }
