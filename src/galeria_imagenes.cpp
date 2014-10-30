@@ -1,6 +1,7 @@
 #include "imagen.h"
 #include "galeria_imagenes.h"
 #include <vector>
+#include <iostream>
 //TODO ordenar esto como estaba el .h original
 //TODO unificar el uso de this-> (ponerlo siempre)
 
@@ -214,13 +215,29 @@ void GaleriaImagenes::acomodar() {
   }
 }
 */
+
+void swapIMG(vector<Imagen> &galeria, int pos1, int pos2){
+  Imagen imagenMomentanea (0,0);
+  imagenMomentanea = galeria[pos1];
+  galeria[pos1] = galeria[pos2];
+  galeria[pos2] = imagenMomentanea;
+}
+
+void swapVotos(vector<int> &galeria, int pos1, int pos2){
+  int votosMomentaneo;
+  votosMomentaneo = galeria[pos1];
+  galeria[pos1] = galeria[pos2];
+  galeria[pos2] = votosMomentaneo;
+}
+
 void GaleriaImagenes::acomodar() {
   int i = 0;
-  int j = i;
   int n = this->imagenes.size();
   while( i < n ){
-    while ( j>0 && this->imagenes[j] < this->imagenes[j-1] ){
-      swap(this->imagenes, j, j-1);
+    int j = i;
+    while ( j > 0 && this->votos[j] < this->votos[j-1] ){
+      swapIMG(this->imagenes, j, j-1);
+      swapVotos(this->votos, j, j-1);
       j--;
     }
     i++;
