@@ -28,19 +28,21 @@ int main()
 	string rutaArchivoGaleria;
 
 	while(selected_action != 0){
-		cout << "ingrese el número de la acción que desea realizar:" << endl;
-		cout << "0. exit" << endl;
-		cout << "1. blur" << endl;
-		cout << "2. acuarela" << endl;
-		cout << "3. cargar galería" << endl;
-		cout << "4. dividirYAgregar" << endl;
-		cout << "5. posicionesMásOscuras" << endl;
-		cout << "6. top 10" << endl;
-		cout << "7. laMásChiquitaConPuntoBlanco" << endl;
-		cout << "8. agregarImagen" << endl;
-		cout << "9. votar" << endl;
-		cout << "10. eliminarMásVotada" << endl;
-		cout << "11. guardar galería" << endl;
+
+		cout << "ingrese el número de la acción que desea realizar:\n"
+		"0. exit\n"
+		"1. blur\n"
+		"2. acuarela\n"
+		"3. cargar galería\n"
+		"4. dividirYAgregar\n"
+		"5. posicionesMásOscuras\n"
+		"6. top 10\n"
+		"7. laMásChiquitaConPuntoBlanco\n"
+		"8. agregarImagen\n"
+		"9. votar\n"
+		"10. eliminarMásVotada\n"
+		"11. guardar galería\n"
+		;
 
 		cin >> selected_action;
 
@@ -79,12 +81,13 @@ int main()
 				doGuardarGaleria(galeria, rutaArchivoGaleria);
 				break;
 			default:
-				cin.ignore();
 				break;
 		}
 
 		if(selected_action != 0){
-			cout << "presione una tecla para continuar..." << endl;
+			// Tenemos que preguntar si esto va a interferir con el testing que le hagan a nuestro programa
+			cin.ignore();
+			cout << "presione una tecla para continuar...\n";
 			cin.ignore();
 		}
 	}
@@ -96,9 +99,8 @@ void doFilter(int filter){
 	ofstream archivoOut; abrirArchivoOut("ingrese el nombre del archivo de salida:", archivoOut);
 	int k;
 
-	cout << "ingrese la intensidad del filtro (k):" << endl;
+	cout << "ingrese la intensidad del filtro (k):\n";
 	cin >> k;
-	cin.ignore();
 
 	imagenOriginal.cargar(archivoIn);
 	switch(filter){
@@ -135,7 +137,7 @@ void doPosicionesMasOscuras(GaleriaImagenes &galeria){
 		}
 	}
 
-	cout << "]" << endl;
+	cout << "]\n";
 
 	galeria.agregarImagen(imagenOriginal);
 
@@ -164,8 +166,6 @@ void doGuardarGaleria(GaleriaImagenes &galeria, string &rutaArchivoGaleria){
 	archivoOut.open(rutaArchivoGaleria.c_str());
 
 	galeria.guardar(archivoOut);
-
-	cin.ignore();
 }
 
 void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
@@ -178,16 +178,13 @@ void doLaMasChiquitaConPuntoBlanco(GaleriaImagenes &galeria){
 		imagenFinal.guardar(archivoOut);
 	}
 	else{
-		cout << "no se encontró ninguna imagen con punto blanco" << endl;
+		cout << "no se encontró ninguna imagen con punto blanco\n";
 	}
-
-	cin.ignore();
 }
 
 void doEliminarMasVotada(GaleriaImagenes &galeria){
 	// FIXME: el requiere dice que aca tiene que haber al menos una imagen y no esta chequeandose eso.
 	galeria.eliminarMasVotada();
-	cin.ignore();
 }
 
 void doVotar(GaleriaImagenes &galeria){
@@ -198,9 +195,6 @@ void doVotar(GaleriaImagenes &galeria){
 	imagenVotada.cargar(archivoIn);
 
 	galeria.votar(imagenVotada);
-
-	cin.ignore();
-
 }
 
 void doTop10(GaleriaImagenes &galeria){
@@ -222,8 +216,6 @@ void doTop10(GaleriaImagenes &galeria){
 	}
 
 	archivoOut << ']';
-
-	cin.ignore();
 }
 
 string pedirString(string mensaje) {
