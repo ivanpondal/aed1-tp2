@@ -68,10 +68,12 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
       x=0;
       while(x < an && !imgTieneBlanco) {
 
-        // en el caso de que tengan punto blanco me fijo si es más chica la imagen que la anterior que tuviese
+        // en el caso de que tengan punto blanco me fijo si es más chica la
+        // imagen que la anterior que tuviese
         if(img.obtenerPixel(y, x) == pixelBlanco) {
           imgTieneBlanco = true;
-          // si todavia no habia guardado ninguna con punto blanco o el area que tengo es mas grande que esta, la guardo
+          // si todavia no habia guardado ninguna con punto blanco o el area
+          // que tengo es mas grande que esta, la guardo
           if ((minArea == -1) || (minArea > area)) {
               minArea = area;
               laMasChiquitaConPuntoBlanco = img;

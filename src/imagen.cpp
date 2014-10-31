@@ -101,7 +101,12 @@ void Imagen::upSort(int a[], int n) const{
 }
 
 bool Imagen::kVecinosCompletos(int k, int x, int y) const {
-	return (x-k+1)>=0 && (x+k-1)<this->ancho() && (y-k+1)>=0 && (y+k-1)<this->alto();
+
+	return (x-k+1)>=0
+        && (x+k-1)<this->ancho()
+        && (y-k+1)>=0
+        && (y+k-1)<this->alto();
+
 }
 
 void Imagen::aplicarFiltro(int filtro, int k) {
@@ -196,7 +201,9 @@ Pixel Imagen::pixelMedianaKVecinos(int k, int x, int y) const {
   upSort(green, sizeKVecinos);
   upSort(blue, sizeKVecinos);
 
-  pixelMediana.cambiarPixel(red[middleKVecinos], green[middleKVecinos], blue[middleKVecinos]);
+  pixelMediana.cambiarPixel(red[middleKVecinos],
+                            green[middleKVecinos],
+                            blue[middleKVecinos]);
   return pixelMediana;
 }
 

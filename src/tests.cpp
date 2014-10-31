@@ -84,7 +84,8 @@ void testImagen() {
   //guardar
   ostringstream oss;
   i1.guardar(oss);
-  assert (oss.str() == "2 3 [(0;0;0),(0;0;0),(0;0;0),(0;0;0),(255;0;0),(0;0;0)]");
+  string esperado = "2 3 [(0;0;0),(0;0;0),(0;0;0),(0;0;0),(255;0;0),(0;0;0)]";
+  assert (oss.str() == esperado);
 
   //cargar
   istringstream iss("2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)]");
@@ -140,8 +141,10 @@ void testImagen() {
 }
 
 void testGaleria() {
-  string galeriaInString  = "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),(1 1 [(2;2;2)],2)]";
-  string galeriaOutString = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  string galeriaInString  =
+                "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),(1 1 [(2;2;2)],2)]";
+  string galeriaOutString =
+                "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
 
   istringstream iss(galeriaInString.c_str());
   ostringstream oss;
@@ -214,8 +217,13 @@ void testGaleria() {
   }
 
   //agrega imagen cuaquiera de 2x2 que no está
-  string galeriaInStringa  = "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),(1 1 [(2;2;2)],2)]";
-  string galeriaOutStringa = "[(2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)],0),(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  string galeriaInStringa  = "[(1 1 [(1;1;1)],5),(1 1 [(3;3;3)],3),"
+                              "(1 1 [(2;2;2)],2)]";
+
+  string galeriaOutStringa =
+                    "[(2 2 [(1;2;3),(123;121;31),(2;1;231),(167;161;173)],0),"
+                    "(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+
   istringstream issa(galeriaInStringa.c_str());
   ostringstream ossa;
 
@@ -233,8 +241,10 @@ void testGaleria() {
 
   //mantiene la galeria porque la imagen y existia
 
-  string galeriaInStringb  = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
-  string galeriaOutStringb = "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  string galeriaInStringb  =
+            "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
+  string galeriaOutStringb =
+            "[(1 1 [(2;2;2)],2),(1 1 [(3;3;3)],3),(1 1 [(1;1;1)],5)]";
   istringstream issb(galeriaInStringb.c_str());
   ostringstream ossb;
 
@@ -290,7 +300,10 @@ void testGaleria() {
   assert (oss.str() == galeriaOutString);
 
   // dos imagenes con punto blanco
-  galeriaInString = "[(1 2 [(255;255;255),(0;0;0)],0),(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0)]";
+  galeriaInString =
+        "[(1 2 [(255;255;255),(0;0;0)],0),(1 1 [(0;0;0)],0),"
+        "(3 1 [(255;255;255),(0;0;0),(255;255;255)],0)]";
+
   galeriaOutString = "1 2 [(255;255;255),(0;0;0)]";
   iss.clear();
   iss.str(galeriaInString.c_str());
@@ -311,11 +324,15 @@ void testGaleria() {
   oss.str("");
   oss.clear();
   g.guardar(oss);
-  assert (oss.str() == "[(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0),(1 2 [(255;255;255),(0;0;0)],1)]");
+  assert (oss.str() ==
+    "[(1 1 [(0;0;0)],0),(3 1 [(255;255;255),(0;0;0),(255;255;255)],0),"
+    "(1 2 [(255;255;255),(0;0;0)],1)]");
 
   //dividir y agregar
   {
-    istringstream giss("[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0)]");
+    istringstream giss(
+                "[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0)]");
+                
     istringstream iiss("2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)]");
     ostringstream oss;
     GaleriaImagenes g;
@@ -328,6 +345,9 @@ void testGaleria() {
 
     g.guardar(oss);
 
-    assert (oss.str() == "[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0),(1 1 [(11;11;11)],0),(1 1 [(22;22;22)],0),(1 1 [(33;33;33)],0),(1 1 [(44;44;44)],0)]");
+    assert (oss.str() ==
+        "[(2 2 [(11;11;11),(22;22;22),(33;33;33),(44;44;44)],0),"
+        "(1 1 [(11;11;11)],0),(1 1 [(22;22;22)],0),(1 1 [(33;33;33)],0),"
+        "(1 1 [(44;44;44)],0)]");
   }
 }
