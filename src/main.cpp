@@ -262,7 +262,7 @@ void abrirArchivoIn(string mensaje, ifstream& archivoIn) {
 }
 
 void abrirArchivoInYpisarElNombre(string mje, ifstream& archivoIn, string& nom){
-	elNombre = pedirString(mje);
+	nom = pedirString(mje);
 	archivoIn.open(nom.c_str());
 }
 

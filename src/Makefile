@@ -1,9 +1,9 @@
-all: clean conv tests main
+all: clean tests main
 
 clean:
 	rm -f pixel.o imagen.o galeria_imagenes.o main tests
 
-tests: pixel.o imagen.o galeria_imagenes.o conv
+tests: pixel.o imagen.o galeria_imagenes.o
 	g++ -g -o tests tests.cpp pixel.o imagen.o galeria_imagenes.o
 	./tests
 
@@ -18,6 +18,3 @@ imagen.o:
 
 galeria_imagenes.o:
 	g++ -g -c galeria_imagenes.cpp
-
-conv:
-	cd ../res && make

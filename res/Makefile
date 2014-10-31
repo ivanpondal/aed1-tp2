@@ -1,8 +1,11 @@
 define 2spec =
-python2 ../tools/algo1converter.py pics/$(basename $@).png $(basename $@).specimg 0
-for m in acuarela blur; do \
-	python2 ../tools/algo1converter.py filtered/$(basename $@).$$m.k5.png $(basename $@).$$m.k5.specimg 0; \
-done
+python2 ../tools/algo1converter.py pics/$(basename $@).png \\
+			$(basename $@).specimg 0
+python2 ../tools/algo1converter.py filtered/$(basename $@).acuarela.k5.png \\
+			$(basename $@).acuarela.k5.specimg 0
+python2 ../tools/algo1converter.py filtered/$(basename $@).blur.k5.png \\
+		$(basename $@).blur.k5.specimg 0
+
 endef
 
 
