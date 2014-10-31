@@ -114,8 +114,8 @@ void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
 void GaleriaImagenes::votar(const Imagen &imagen) {
   int posImg;
   int k=0;
-  while(k<imagenes.size()){
-    if(imagenes[k]==imagen){
+  while(k<this->imagenes.size()){
+    if(this->imagenes[k]==imagen){
       posImg=k;
     }
     k++;
@@ -125,8 +125,8 @@ void GaleriaImagenes::votar(const Imagen &imagen) {
 }
 
 void GaleriaImagenes::eliminarMasVotada() {
-  imagenes.pop_back();
-  votos.pop_back();
+  this->imagenes.pop_back();
+  this->votos.pop_back();
 }
 
 vector <Imagen> GaleriaImagenes::top10() const {

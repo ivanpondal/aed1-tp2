@@ -253,14 +253,14 @@ void GaleriaImagenes::eliminarMasVotada() {
 	// 	porque InvRep(this) es verdadero con lo cual
 	//	$|this.imagenes| == |this.votos|$
 	// implica $P_{Aux 1}$: $|imagenes(g)|>0$
-	imagenes.pop_back();
+	this->imagenes.pop_back();
 	// E1:
 	// vale $Q_{Aux 1}$: 
 	// $|this.imagenes| == |this.imagenes@E0| - 1 \ \land$
 	// $(\forall i \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[i] == this.imagenes@E0[i]$
 	// vale $this.votos == this.votos@E0$
 	// implica $P_{Aux 2}$: $|this.votos| >0$
-	votos.pop_back();
+	this->votos.pop_back();
 	// E2:
 	// vale $Q_{Aux 2}$: 
 	// $|this.votos| == |this.votos@E1| - 1 \ \land $ 
