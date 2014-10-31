@@ -1,7 +1,5 @@
 #include "pixel.h"
 
-//TODO ordenar esto como estaba el .h original
-
 Pixel::Pixel(int red, int green, int blue) {
   this->cambiarPixel(red, green, blue);
 }

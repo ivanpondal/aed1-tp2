@@ -1,7 +1,6 @@
 #include "imagen.h"
 #include "galeria_imagenes.h"
 #include <vector>
-//TODO ordenar esto como estaba el .h original
 
 void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
   int d, i, j, x, y, k, an, al;
@@ -89,18 +88,6 @@ Imagen GaleriaImagenes::laMasChiquitaConPuntoBlanco() const {
   }
 
   return laMasChiquitaConPuntoBlanco;
-}
-
-bool GaleriaImagenes::existeImagen(const Imagen &imagen) {
-  int i=0;
-  bool res=false;
-  while(i<this->imagenes.size() && res==false){
-    if(imagen == this->imagenes[i]){
-      res=true;
-    }
-    i++;
-  }
-  return res;
 }
 
 void GaleriaImagenes::agregarImagen(const Imagen &imagen) {
@@ -211,4 +198,16 @@ void GaleriaImagenes::acomodar() {
       }
     }
   }
+}
+
+bool GaleriaImagenes::existeImagen(const Imagen &imagen) {
+  int i=0;
+  bool res=false;
+  while(i<this->imagenes.size() && res==false){
+    if(imagen == this->imagenes[i]){
+      res=true;
+    }
+    i++;
+  }
+  return res;
 }
