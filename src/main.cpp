@@ -85,7 +85,6 @@ int main()
 		}
 
 		if(selected_action != 0){
-			// TODO: Tenemos que preguntar si esto va a interferir con el testing que le hagan a nuestro programa
 			cin.ignore();
 			cout << "presione una tecla para continuar...\n";
 			cin.ignore();

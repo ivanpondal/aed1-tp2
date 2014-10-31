@@ -193,8 +193,7 @@ void GaleriaImagenes::acomodar() {
   int    av;
 
   int i, j;
-  //TODO: REEMPLAZAR POR UN INSERTIONSORT
-  //CabezaSort
+
   for(i=0; i<this->votos.size(); i++) {
     for(j=i+1; j<this->votos.size(); j++){
 
