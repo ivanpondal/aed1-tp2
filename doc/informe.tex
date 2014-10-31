@@ -109,7 +109,7 @@
 
 \begin{ejercicio}
       \begin{problema*}{votar}{g: Galeria, i: Imagen}
-		\requiere[noSeVotaCualquierCosa]{i \in imagenes(pre(g)}
+		\requiere[noSeVotaCualquierCosa]{i \in imagenes(pre(g))}
 		\modifica{g}
 		\asegura[noCambianLasImagenes]{ mismos(imagenes(g), imagenes(pre(g))) }
 		\asegura[noSeTocanLosVotosDeLosOtros]{ (\forall m \leftarrow imagenes(g), m \neq i)\ votos(g, m) == votos(pre(g), m)}
