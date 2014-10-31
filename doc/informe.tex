@@ -14,9 +14,13 @@
 \usepackage{longtable}
 \usepackage{caratula}
 \usepackage{xcolor}
+
+
+\usepackage{minted}
+\usepackage{al}
+
 % incluye macros espec materia
 \include{algo1-cmds}
-
 % Encabezado
 \lhead{Algoritmos y Estructuras de Datos I}
 \rhead{Grupo 07}
@@ -255,15 +259,15 @@ void GaleriaImagenes::eliminarMasVotada() {
 	// implica $P_{Aux 1}$: $|imagenes(g)|>0$
 	this->imagenes.pop_back();
 	// E1:
-	// vale $Q_{Aux 1}$: 
+	// vale $Q_{Aux 1}$:
 	// $|this.imagenes| == |this.imagenes@E0| - 1 \ \land$
 	// $(\forall i \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[i] == this.imagenes@E0[i]$
 	// vale $this.votos == this.votos@E0$
 	// implica $P_{Aux 2}$: $|this.votos| >0$
 	this->votos.pop_back();
 	// E2:
-	// vale $Q_{Aux 2}$: 
-	// $|this.votos| == |this.votos@E1| - 1 \ \land $ 
+	// vale $Q_{Aux 2}$:
+	// $|this.votos| == |this.votos@E1| - 1 \ \land $
 	// $(\forall i \leftarrow [0..|this.votos@E1| - 1)) \ this.votos[i] == this.votos@E1[i]$
 	// vale $this.imagenes == this.imagenes@E1$
 
@@ -308,7 +312,7 @@ también se cumple la postcondición.
 	// implica $|this.imagenes| == |this.imagenes@E0| - 1$
 	// 	por transformacion de estados
 	// implica $|imagenes(g)| == |imagenes(pre(g))| - 1$
-	//	por abs(this, g) 
+	//	por abs(this, g)
 	//	mismos(this.imagenes, imagenes(g))
 	//	por abs(pre(this), pre(g))
 	//	mismos(this.imagenes@E0, imagenes(pre(g))
@@ -326,7 +330,7 @@ también se cumple la postcondición.
 	// implica $(\forall i \leftarrow [0..|imagenes(pre(g))| - 1))$
 	// $imagenes(g)[i] == imagenes(pre(g))[i] \ \land$
 	// $votos(g,imagenes(g)[i]) == votos(pre(g),imagenes(pre(g))[i])$
-	//	por abs(this, g) 
+	//	por abs(this, g)
 	//	mismos(this.imagenes, imagenes(g))
 	// 	$(\forall i \leftarrow [0..|this.votos|)) \ this.votos[i] == votos(g, this.imagenes[i])$
 	//	por abs(pre(this), pre(g))
@@ -340,5 +344,52 @@ también se cumple la postcondición.
 	//	por implica anterior, se recorrian todos los valores de imagenes
 	//	con lo cual se puede escribir con un paratodo
 \end{lstlisting}
+
+
+\newpage
+\section{Código fuente}
+
+\subsection{pixel.h}
+\inputminted[linenos]{cpp}{../src/pixel.h}
+
+\newpage
+\subsection{pixel.cpp}
+\inputminted[linenos]{cpp}{../src/pixel.cpp}
+
+\newpage
+\subsection{imagen.h}
+\inputminted[linenos]{cpp}{../src/imagen.h}
+
+\newpage
+\subsection{imagen.cpp}
+\inputminted[linenos]{cpp}{../src/imagen.cpp}
+
+\newpage
+\subsection{galeria_imagenes.h}
+\inputminted[linenos]{cpp}{../src/galeria_imagenes.h}
+
+\newpage
+\subsection{galeria_imagenes.cpp}
+\inputminted[linenos]{cpp}{../src/galeria_imagenes.cpp}
+
+\newpage
+\subsection{main.cpp}
+\inputminted[linenos]{cpp}{../src/main.cpp}
+
+\newpage
+\subsection{tests.cpp}
+\inputminted[linenos]{cpp}{../src/tests.cpp}
+
+\newpage
+\subsection{Makefile (principal)}
+\begin{alltt}
+	\input{../src/Makefile}
+\end{alltt}
+
+\newpage
+\subsection{../res/Makefile (para convertir imagenes)}
+\begin{alltt}
+	\input{../res/Makefile}
+\end{alltt}
 
 \end{document}
