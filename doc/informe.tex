@@ -208,30 +208,30 @@
 
 \begin{lstlisting}
 class GaleriaImagenes {
- public:
-  void dividirYAgregar(const Imagen &imagen, int n, int m);
-  Imagen laMasChiquitaConPuntoBlanco() const;
-  void agregarImagen(const Imagen &imagen);
-  void votar(const Imagen &imagen);
-  void eliminarMasVotada();
-  vector <Imagen> top10() const;
-  void guardar(std::ostream& os) const;
-  void cargar (std::istream& is);
+	public:
+		void dividirYAgregar(const Imagen &imagen, int n, int m);
+		Imagen laMasChiquitaConPuntoBlanco() const;
+		void agregarImagen(const Imagen &imagen);
+		void votar(const Imagen &imagen);
+		void eliminarMasVotada();
+		vector <Imagen> top10() const;
+		void guardar(std::ostream& os) const;
+		void cargar (std::istream& is);
+	private:
+		void acomodar();
+		bool existeImagen(const Imagen &imagen);
+		std::vector<Imagen> imagenes;
+		std::vector<int> votos;
 
- private:
-  void acomodar();
-  bool existeImagen(const Imagen &imagen);
-  std::vector<Imagen> imagenes;
-  std::vector<int> votos;
+	// InvRep(imp : GaleriaImagenes):
+	// $|imp.imagenes| == |imp.votos| \ \land$
+	// $(\forall v \leftarrow imp.votos) \ v \geq 0 \ \land$
+	// $(\forall i,j \leftarrow [0..|imp.imagenes|),i < j)$
+	// $imp.imagenes[i] \neq imp.imagenes[j] \ \land \ imp.votos[i] \leq imp.votos[j]$
 
-  // InvRep(imp : GaleriaImagenes):
-  // $|imp.imagenes| == |imp.votos| \ \land$
-  // $(\forall v \leftarrow imp.votos) \ v \geq 0 \ \land$
-  // $(\forall i,j \leftarrow [0..|imp.imagenes|),i < j) \ imp.imagenes[i] \neq imp.imagenes[j] \ \land \ imp.votos[i] \leq imp.votos[j] $
-
-  // abs(imp : GaleriaImagenes, esp : Galeria):
-  // $mismos(imp.imagenes, imagenes(esp)) \ \land$
-  // $(\forall i \leftarrow [0..|imp.votos|)) \ imp.votos[i] == votos(esp, imp.imagenes[i])$
+	// abs(imp : GaleriaImagenes, esp : Galeria):
+	// $mismos(imp.imagenes, imagenes(esp)) \ \land$
+	// $(\forall i \leftarrow [0..|imp.votos|)) \ imp.votos[i] == votos(esp, imp.imagenes[i])$
 };
 \end{lstlisting}
 
@@ -239,23 +239,62 @@ class GaleriaImagenes {
 
 \begin{lstlisting}
 void GaleriaImagenes::eliminarMasVotada() {
-  // Estado E0:
-  // vale $invRep(pre(this)) \ \land \ abs(pre(this), pre(a))$
-  // vale $|imagenes(pre(a))| > 0$ (por requiere)
-  // implica $|pre(this).imagenes| > 0$ (por abs(pre(this), pre(a)))
-  // implica $|pre(this).votos| > 0$
-  
-  // implica $P_{Aux}$: $|pre(this).imagenes|>0$
-  imagenes.pop_back();
-  // Estado E1:
-  // vale $Q_{Aux}$: 
-  // implica $|this.imagenes| == |pre(this).imagenes| - 1 \ \land$
-  // $(\forall i \leftarrow [0..|pre(this).imagenes| - 1)) \ this.imagenes[i] == pre(this).imagenes[i]$
+	// E0:
+	// implica $InvRep(this)$
+	// 	por ser un metodo publico, InvRep se asume verdadero
+	// implica $abs(this, g)$
+	// 	porque InvRep(this) es verdadero
+	// vale $|imagenes(g)| > 0$
+	// 	por requiere
+	// implica $|this.imagenes| > 0$
+	// 	por abs(this, g)
+	//	ya que vale mismos(this.imagenes, imagenes(g))
+	// implica $|this.votos| > 0$
+	// 	porque InvRep(this) es verdadero con lo cual
+	//	$|this.imagenes| == |this.votos|$
+	// implica $P_{Aux 1}$: $|imagenes(g)|>0$
+	imagenes.pop_back();
+	// E1:
+	// vale $Q_{Aux 1}$: 
+	// $|this.imagenes| == |this.imagenes@E0| - 1 \ \land$
+	// $(\forall i \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[i] == this.imagenes@E0[i]$
+	// vale $this.votos == this.votos@E0$
+	// implica $P_{Aux 2}$: $|this.votos| >0$
+	votos.pop_back();
+	// E2:
+	// vale $Q_{Aux 2}$: 
+	// $|this.votos| == |this.votos@E1| - 1 \ \land $ 
+	// $(\forall i \leftarrow [0..|this.votos@E1| - 1)) \ this.votos[i] == this.votos@E1[i]$
+	// vale $this.imagenes == this.imagenes@E1$
 
-  votos.pop_back();
+	// implica $|this.imagenes| == |this.imagenes@E0| - 1 \ \land \ |this.votos| == |this.votos@E0| - 1$
+	// 	por transformacion de estados
+	// implica $|this.imagenes| == |this.votos|$
+	//	por implica anterior e InvRep@E0
+
+	// implica $(\forall i \leftarrow [0..|this.votos@E0| - 1)) \ this.votos[i] == this.votos@E0[i]$
+	//	por transformacion de estados
+	// implica $(\forall v \leftarrow this.votos) \ v == v@E0$
+	//	por implica anterior, donde se estaba recorriendo todo el listado
+	// implica $(\forall v \leftarrow this.votos) \ v \geq 0$
+	//	por InvRep@E0
+
+	// implica $(\forall i \leftarrow [0..|this.votos@E0| - 1)) \ this.votos[i] == this.votos@E0[i] \ \land$
+	// $(\forall i \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[i] == this.imagenes@E0[i]$
+	// 	por transformacion de estados
+	// implica $(\forall i,j \leftarrow [0..|this.imagenes@E0| - 1),i < j)$
+	// $this.imagenes[i] \neq this.imagenes[j] \ \land \ this.votos[i] \leq this.votos[j]$
+	//	por InvRep@E0
+	// implica $(\forall i,j \leftarrow [0..|this.imagenes|),i < j)$
+	// $this.imagenes[i] \neq this.imagenes[j] \ \land \ this.votos[i] \leq this.votos[j]$
+	//	por transformacion de estados
+
+	// implica InvRep(this)
 }
 
 \end{lstlisting}
+
+\newpage
 
 \subsection{Demostración de correctitud}
 
