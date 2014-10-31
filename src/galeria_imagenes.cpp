@@ -2,7 +2,6 @@
 #include "galeria_imagenes.h"
 #include <vector>
 //TODO ordenar esto como estaba el .h original
-//TODO unificar el uso de this-> (ponerlo siempre)
 
 void GaleriaImagenes::dividirYAgregar(const Imagen &imagen, int n, int m) {
   int d, i, j, x, y, k, an, al;

@@ -6,7 +6,7 @@
 #include <vector>
 
 //TODO ordenar esto como estaba el .h original
-//TODO unificar el uso de this-> (ponerlo siempre)
+
 Imagen::Imagen(int alto_param, int ancho_param) {
 
     for (int y=0; y<alto_param; y++) {
