@@ -280,7 +280,7 @@ void GaleriaImagenes::eliminarMasVotada() {
 	//	por InvRep@E0
 
 	// implica $(\forall i \leftarrow [0..|this.votos@E0| - 1)) \ this.votos[i] == this.votos@E0[i] \ \land$
-	// $(\forall i \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[i] == this.imagenes@E0[i]$
+	// $(\forall j \leftarrow [0..|this.imagenes@E0| - 1)) \ this.imagenes[j] == this.imagenes@E0[j]$
 	// 	por transformacion de estados
 	// implica $(\forall i,j \leftarrow [0..|this.imagenes@E0| - 1),i < j)$
 	// $this.imagenes[i] \neq this.imagenes[j] \ \land \ this.votos[i] \leq this.votos[j]$
@@ -297,5 +297,48 @@ void GaleriaImagenes::eliminarMasVotada() {
 \newpage
 
 \subsection{Demostración de correctitud}
+
+\begin{paragraph}{}
+Ahora que demostramos que se restaura el invariante de representación a la
+salida del método podemos usar el predicado de abstracción para demostrar que
+también se cumple la postcondición.
+\end{paragraph}
+
+\begin{lstlisting}
+	// implica $|this.imagenes| == |this.imagenes@E0| - 1$
+	// 	por transformacion de estados
+	// implica $|imagenes(g)| == |imagenes(pre(g))| - 1$
+	//	por abs(this, g) 
+	//	mismos(this.imagenes, imagenes(g))
+	//	por abs(pre(this), pre(g))
+	//	mismos(this.imagenes@E0, imagenes(pre(g))
+
+	// implica $(\forall i \leftarrow imagenes(pre(g)),\ i \notin imagenes(g))$
+	// $votos(pre(g), i) == maximo(todosLosVotos(pre(g)))$
+	//	por InvRep(this), ya que nos aseguraba que las imagenes
+	//	se encontrasen ordenadas por votos en orden creciente
+	//	removiendo la ultima en el listado, se removio la mas votada
+
+	// implica $(\forall i \leftarrow [0..|this.imagenes@E0| - 1))$
+	// $this.imagenes[i] == this.imagenes@E0[i] \ \land \ this.votos[i] == this.votos@E0[i]$
+	//	por transformacion de estados e InvRep@E0
+	//	(la longitud de imagenes que es la misma que la de votos)
+	// implica $(\forall i \leftarrow [0..|imagenes(pre(g))| - 1))$
+	// $imagenes(g)[i] == imagenes(pre(g))[i] \ \land$
+	// $votos(g,imagenes(g)[i]) == votos(pre(g),imagenes(pre(g))[i])$
+	//	por abs(this, g) 
+	//	mismos(this.imagenes, imagenes(g))
+	// 	$(\forall i \leftarrow [0..|this.votos|)) \ this.votos[i] == votos(g, this.imagenes[i])$
+	//	por abs(pre(this), pre(g))
+	//	mismos(this.imagenes@E0, imagenes(pre(g))
+	// 	$(\forall i \leftarrow [0..|this.votos@E0|)) \ this.votos@E0[i] == votos(pre(g), this.imagenes@E0[i])$
+	// implica $(\forall i \leftarrow [0..|imagenes(g)|))$
+	// $imagenes(g)[i] == imagenes(pre(g))[i] \ \land$
+	// $votos(g,imagenes(g)[i]) == votos(pre(g),imagenes(pre(g))[i])$
+	//	por primer asegura $|imagenes(g)| == |imagenes(pre(g))| - 1$
+	// implica $(\forall i \leftarrow imagenes(g)) \ i \in imagenes(pre(g)) \land votos(g, i) == votos(pre(g), i)$
+	//	por implica anterior, se recorrian todos los valores de imagenes
+	//	con lo cual se puede escribir con un paratodo
+\end{lstlisting}
 
 \end{document}
